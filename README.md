@@ -54,7 +54,7 @@ python -X utf8 -m pytest -q
 opal-bench-score --help
 ```
 
-The package is `Opal-Bench`; its Python import is `opal_bench`. Code lives in `src/`. The four tests reproduce shipped baseline rows, the published leaderboard tables and tasks on the 17 shipped labs. The optional Opal re-score needs a separate growth bundle. A full test run takes about two minutes on one CPU.
+The package is `Opal-Bench`; its Python import is `opal_bench`. Tests reproduce shipped baseline rows, the published leaderboard tables and tasks on the 17 shipped labs. The optional Opal re-score needs a separate growth bundle. A full test run takes about two minutes on one CPU.
 
 ```bash
 opal-bench-score fewshot                        # Shipped dev, test and fresh baselines
@@ -135,7 +135,7 @@ If you independently prepare compatible, normalized pair, prior and cell-line ta
 python -m opal_bench.prepare --extra <dir>/bench_pairs.csv.gz --extra-priors <dir>/bench_priors.csv.gz --test-units <dir>/test_units.csv.gz
 ```
 
-The scorer uses `data/full/` when it exists, and Git ignores it. The original build-machine replay reproduced the pair and prior tables byte-for-byte; that raw-source workflow isn't part of this checkout. [SHA256SUMS.txt](SHA256SUMS.txt) covers the shipped files.
+The scorer uses `data/full/` when it exists, and Git ignores it. [SHA256SUMS.txt](SHA256SUMS.txt) covers the shipped files.
 
 ## Limitations
 
@@ -150,9 +150,9 @@ Lab agreement is limited: median between-lab correlation is 0.21 across the full
 - [Source licenses](DATA_LICENSES.md) records the redistribution audit for each lab.
 - [Negative results](NEGATIVE_RESULTS.md) preserves unsuccessful experiments.
 - `src/` contains scoring, baselines, metrics, data loading and adapters; `tests/` contains frozen numerical expectations.
-- `tools/plot_readme.py` regenerates the four benchmark figures from shipped evidence.
+- `tools/plot_readme.py` regenerates the benchmark figures. Install Matplotlib, then run `python tools/plot_readme.py`.
 
-Figures are saved as SVG under `images/`, with source hashes and plotted values in [figure_data.json](images/figure_data.json). To regenerate them, install Matplotlib in your development environment and run `python tools/plot_readme.py`. The original PNG logo and lab/license badges follow the [Opal repository](https://github.com/TheTinyIntelLab/opal).
+[Figure data](images/figure_data.json) records the plotted values and source hashes.
 
 ## License
 
