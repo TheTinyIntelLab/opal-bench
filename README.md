@@ -16,6 +16,7 @@
   <a href="#results">Results</a> &middot;
   <a href="#submit-a-method">Submit a method</a> &middot;
   <a href="#data-and-reproduction">Data</a> &middot;
+  <a href="https://huggingface.co/datasets/TheTinyIntelLab/opal-bench">Hugging Face</a> &middot;
   <a href="#citation">Citation</a>
 </p>
 
