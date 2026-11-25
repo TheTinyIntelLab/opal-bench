@@ -1,0 +1,22 @@
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "Opal-Bench"
+version = "1"
+description = "Held-out-lab benchmark for predicting combinatorial CRISPR pair growth from single-gene growth (The Tiny Intelligence Lab)"
+readme = "README.md"
+license = {text = "MIT (code); data under per-source licences, see DATA_LICENSES.md"}
+requires-python = ">=3.10"
+dependencies = ["numpy>=1.24", "pandas>=2.0"]
+
+[project.optional-dependencies]
+test = ["pytest>=7"]
+
+[project.scripts]
+opal-bench-score = "opal_bench.score:main"
+
+[tool.setuptools]
+packages = ["opal_bench"]
+package-dir = {"opal_bench" = "src"}
