@@ -1,0 +1,864 @@
+{
+  "sources": {
+    "leaderboard\\rows.csv.gz": "b38f0e86021299f1e89afa014611173a4f51eb30b5d81f18641e35e3abf3892b",
+    "data\\redistributable\\bench_pairs.csv.gz": "2328c2efd9be4c4a01fa7946f9616a4201865b63113c735517f7a3f57c017d0c",
+    "tests\\expected\\leaderboard.json": "04172c7fc596b000b53ddd70016cd457d25e081aa83e794863f43948ee5193ab"
+  },
+  "metric": "exp(mean_labs(mean_units(mean_draws(log(MSE / MSE_MID)))))",
+  "ratios": [
+    {
+      "split": "dev",
+      "k": 0,
+      "model": "ADD",
+      "ratio": 1.3885017093832708
+    },
+    {
+      "split": "dev",
+      "k": 0,
+      "model": "EMB_GenePT",
+      "ratio": 1.9349227561044107
+    },
+    {
+      "split": "dev",
+      "k": 0,
+      "model": "EMB_Geneformer",
+      "ratio": 1.7924363832885126
+    },
+    {
+      "split": "dev",
+      "k": 0,
+      "model": "EMB_scGPT",
+      "ratio": 1.8395115333141547
+    },
+    {
+      "split": "dev",
+      "k": 0,
+      "model": "GBM",
+      "ratio": 1.0855929462467409
+    },
+    {
+      "split": "dev",
+      "k": 0,
+      "model": "GRAPH",
+      "ratio": 1.9645426673443007
+    },
+    {
+      "split": "dev",
+      "k": 0,
+      "model": "LIN5x",
+      "ratio": 1.5635486559604088
+    },
+    {
+      "split": "dev",
+      "k": 0,
+      "model": "MID",
+      "ratio": 1.0
+    },
+    {
+      "split": "dev",
+      "k": 0,
+      "model": "MIN",
+      "ratio": 1.1347171748928249
+    },
+    {
+      "split": "dev",
+      "k": 0,
+      "model": "MLP",
+      "ratio": 2.0796936667552512
+    },
+    {
+      "split": "dev",
+      "k": 0,
+      "model": "v1F",
+      "ratio": 1.4953864708196323
+    },
+    {
+      "split": "dev",
+      "k": 0,
+      "model": "v1O",
+      "ratio": 1.1964435051047282
+    },
+    {
+      "split": "dev",
+      "k": 10,
+      "model": "ADD",
+      "ratio": 1.3883909331721014
+    },
+    {
+      "split": "dev",
+      "k": 10,
+      "model": "FS_EMB_GenePT",
+      "ratio": 0.7221853613870594
+    },
+    {
+      "split": "dev",
+      "k": 10,
+      "model": "FS_EMB_Geneformer",
+      "ratio": 0.7102666570505931
+    },
+    {
+      "split": "dev",
+      "k": 10,
+      "model": "FS_EMB_scGPT",
+      "ratio": 0.7265198175469504
+    },
+    {
+      "split": "dev",
+      "k": 10,
+      "model": "FS_GBM",
+      "ratio": 0.6702212217986653
+    },
+    {
+      "split": "dev",
+      "k": 10,
+      "model": "FS_GRAPH",
+      "ratio": 0.7153487519846733
+    },
+    {
+      "split": "dev",
+      "k": 10,
+      "model": "FS_LIN5_lam",
+      "ratio": 0.6611688467283342
+    },
+    {
+      "split": "dev",
+      "k": 10,
+      "model": "FS_LIN5x",
+      "ratio": 0.660120279591185
+    },
+    {
+      "split": "dev",
+      "k": 10,
+      "model": "FS_MLP",
+      "ratio": 0.7521330703782401
+    },
+    {
+      "split": "dev",
+      "k": 10,
+      "model": "MID",
+      "ratio": 1.0
+    },
+    {
+      "split": "dev",
+      "k": 10,
+      "model": "MIN",
+      "ratio": 1.13484461905606
+    },
+    {
+      "split": "dev",
+      "k": 10,
+      "model": "NET_ATT",
+      "ratio": 0.5493305059777315
+    },
+    {
+      "split": "dev",
+      "k": 10,
+      "model": "NET_MLP",
+      "ratio": 0.5864053813441835
+    },
+    {
+      "split": "dev",
+      "k": 10,
+      "model": "v1F",
+      "ratio": 1.495568621576586
+    },
+    {
+      "split": "dev",
+      "k": 10,
+      "model": "v1O",
+      "ratio": 1.196354006035408
+    },
+    {
+      "split": "dev",
+      "k": 10,
+      "model": "v1R",
+      "ratio": 0.6073918863314418
+    },
+    {
+      "split": "dev",
+      "k": 20,
+      "model": "ADD",
+      "ratio": 1.3884258434470658
+    },
+    {
+      "split": "dev",
+      "k": 20,
+      "model": "FS_EMB_GenePT",
+      "ratio": 0.5900089998934969
+    },
+    {
+      "split": "dev",
+      "k": 20,
+      "model": "FS_EMB_Geneformer",
+      "ratio": 0.5619437352489004
+    },
+    {
+      "split": "dev",
+      "k": 20,
+      "model": "FS_EMB_scGPT",
+      "ratio": 0.5686573835920625
+    },
+    {
+      "split": "dev",
+      "k": 20,
+      "model": "FS_GBM",
+      "ratio": 0.5228472814716032
+    },
+    {
+      "split": "dev",
+      "k": 20,
+      "model": "FS_GRAPH",
+      "ratio": 0.5640916139534721
+    },
+    {
+      "split": "dev",
+      "k": 20,
+      "model": "FS_LIN5_lam",
+      "ratio": 0.5069320171569123
+    },
+    {
+      "split": "dev",
+      "k": 20,
+      "model": "FS_LIN5x",
+      "ratio": 0.5129792552462605
+    },
+    {
+      "split": "dev",
+      "k": 20,
+      "model": "FS_MLP",
+      "ratio": 0.6046335544287883
+    },
+    {
+      "split": "dev",
+      "k": 20,
+      "model": "MID",
+      "ratio": 1.0
+    },
+    {
+      "split": "dev",
+      "k": 20,
+      "model": "MIN",
+      "ratio": 1.1345035673921564
+    },
+    {
+      "split": "dev",
+      "k": 20,
+      "model": "NET_ATT",
+      "ratio": 0.4718504343888621
+    },
+    {
+      "split": "dev",
+      "k": 20,
+      "model": "NET_MLP",
+      "ratio": 0.5054651874263076
+    },
+    {
+      "split": "dev",
+      "k": 20,
+      "model": "v1F",
+      "ratio": 1.4955043116352276
+    },
+    {
+      "split": "dev",
+      "k": 20,
+      "model": "v1O",
+      "ratio": 1.19684380401098
+    },
+    {
+      "split": "dev",
+      "k": 20,
+      "model": "v1R",
+      "ratio": 0.504077056658028
+    },
+    {
+      "split": "dev",
+      "k": 50,
+      "model": "ADD",
+      "ratio": 1.3887608036299754
+    },
+    {
+      "split": "dev",
+      "k": 50,
+      "model": "FS_EMB_GenePT",
+      "ratio": 0.4364256191513173
+    },
+    {
+      "split": "dev",
+      "k": 50,
+      "model": "FS_EMB_Geneformer",
+      "ratio": 0.43798133013695906
+    },
+    {
+      "split": "dev",
+      "k": 50,
+      "model": "FS_EMB_scGPT",
+      "ratio": 0.4380650694903281
+    },
+    {
+      "split": "dev",
+      "k": 50,
+      "model": "FS_GBM",
+      "ratio": 0.43066625521169355
+    },
+    {
+      "split": "dev",
+      "k": 50,
+      "model": "FS_GRAPH",
+      "ratio": 0.43532548167420426
+    },
+    {
+      "split": "dev",
+      "k": 50,
+      "model": "FS_LIN5_lam",
+      "ratio": 0.4269420988248563
+    },
+    {
+      "split": "dev",
+      "k": 50,
+      "model": "FS_LIN5x",
+      "ratio": 0.4330172591724319
+    },
+    {
+      "split": "dev",
+      "k": 50,
+      "model": "FS_MLP",
+      "ratio": 0.4325618160125139
+    },
+    {
+      "split": "dev",
+      "k": 50,
+      "model": "MID",
+      "ratio": 1.0
+    },
+    {
+      "split": "dev",
+      "k": 50,
+      "model": "MIN",
+      "ratio": 1.1338540734534313
+    },
+    {
+      "split": "dev",
+      "k": 50,
+      "model": "NET_ATT",
+      "ratio": 0.4100512377879233
+    },
+    {
+      "split": "dev",
+      "k": 50,
+      "model": "NET_MLP",
+      "ratio": 0.4376527423574275
+    },
+    {
+      "split": "dev",
+      "k": 50,
+      "model": "v1F",
+      "ratio": 1.4950102670794871
+    },
+    {
+      "split": "dev",
+      "k": 50,
+      "model": "v1O",
+      "ratio": 1.1956918272895118
+    },
+    {
+      "split": "dev",
+      "k": 50,
+      "model": "v1R",
+      "ratio": 0.429292844218187
+    },
+    {
+      "split": "fresh",
+      "k": 0,
+      "model": "ADD",
+      "ratio": 1.0283967303982975
+    },
+    {
+      "split": "fresh",
+      "k": 0,
+      "model": "MID",
+      "ratio": 1.0
+    },
+    {
+      "split": "fresh",
+      "k": 0,
+      "model": "MIN",
+      "ratio": 1.1765409748499673
+    },
+    {
+      "split": "fresh",
+      "k": 0,
+      "model": "v1F",
+      "ratio": 1.1893235597556508
+    },
+    {
+      "split": "fresh",
+      "k": 0,
+      "model": "v1O",
+      "ratio": 1.0808097452986358
+    },
+    {
+      "split": "fresh",
+      "k": 5,
+      "model": "ADD",
+      "ratio": 1.0283974563569804
+    },
+    {
+      "split": "fresh",
+      "k": 5,
+      "model": "FS_LIN5_lam",
+      "ratio": 1.3496892189855574
+    },
+    {
+      "split": "fresh",
+      "k": 5,
+      "model": "MID",
+      "ratio": 1.0
+    },
+    {
+      "split": "fresh",
+      "k": 5,
+      "model": "MIN",
+      "ratio": 1.176637846427252
+    },
+    {
+      "split": "fresh",
+      "k": 5,
+      "model": "v1F",
+      "ratio": 1.1892489126545025
+    },
+    {
+      "split": "fresh",
+      "k": 5,
+      "model": "v1O",
+      "ratio": 1.0808977822222103
+    },
+    {
+      "split": "fresh",
+      "k": 5,
+      "model": "v1R",
+      "ratio": 1.053904091501524
+    },
+    {
+      "split": "fresh",
+      "k": 20,
+      "model": "ADD",
+      "ratio": 1.0285887080257168
+    },
+    {
+      "split": "fresh",
+      "k": 20,
+      "model": "FS_LIN5_lam",
+      "ratio": 1.0457765503877692
+    },
+    {
+      "split": "fresh",
+      "k": 20,
+      "model": "MID",
+      "ratio": 1.0
+    },
+    {
+      "split": "fresh",
+      "k": 20,
+      "model": "MIN",
+      "ratio": 1.17664792718695
+    },
+    {
+      "split": "fresh",
+      "k": 20,
+      "model": "v1F",
+      "ratio": 1.1892463012691044
+    },
+    {
+      "split": "fresh",
+      "k": 20,
+      "model": "v1O",
+      "ratio": 1.081282942488963
+    },
+    {
+      "split": "fresh",
+      "k": 20,
+      "model": "v1R",
+      "ratio": 0.9412950054695267
+    },
+    {
+      "split": "test",
+      "k": 0,
+      "model": "ADD",
+      "ratio": 1.2652134694559565
+    },
+    {
+      "split": "test",
+      "k": 0,
+      "model": "EMB_GenePT",
+      "ratio": 1.99341065132947
+    },
+    {
+      "split": "test",
+      "k": 0,
+      "model": "EMB_Geneformer",
+      "ratio": 1.888789067267671
+    },
+    {
+      "split": "test",
+      "k": 0,
+      "model": "EMB_scGPT",
+      "ratio": 1.9512561760372293
+    },
+    {
+      "split": "test",
+      "k": 0,
+      "model": "GBM",
+      "ratio": 1.0830604462889686
+    },
+    {
+      "split": "test",
+      "k": 0,
+      "model": "GRAPH",
+      "ratio": 1.810828246880273
+    },
+    {
+      "split": "test",
+      "k": 0,
+      "model": "LIN5x",
+      "ratio": 1.6043697247363322
+    },
+    {
+      "split": "test",
+      "k": 0,
+      "model": "MID",
+      "ratio": 1.0
+    },
+    {
+      "split": "test",
+      "k": 0,
+      "model": "MIN",
+      "ratio": 1.1716017728746928
+    },
+    {
+      "split": "test",
+      "k": 0,
+      "model": "MLP",
+      "ratio": 2.120899794720717
+    },
+    {
+      "split": "test",
+      "k": 0,
+      "model": "v1F",
+      "ratio": 1.6581578269916553
+    },
+    {
+      "split": "test",
+      "k": 0,
+      "model": "v1O",
+      "ratio": 1.4729252597971858
+    },
+    {
+      "split": "test",
+      "k": 10,
+      "model": "ADD",
+      "ratio": 1.265227415527193
+    },
+    {
+      "split": "test",
+      "k": 10,
+      "model": "FS_EMB_GenePT",
+      "ratio": 0.7666041278134866
+    },
+    {
+      "split": "test",
+      "k": 10,
+      "model": "FS_EMB_Geneformer",
+      "ratio": 0.7689932319448652
+    },
+    {
+      "split": "test",
+      "k": 10,
+      "model": "FS_EMB_scGPT",
+      "ratio": 0.7575134286965356
+    },
+    {
+      "split": "test",
+      "k": 10,
+      "model": "FS_GBM",
+      "ratio": 0.7199643744931667
+    },
+    {
+      "split": "test",
+      "k": 10,
+      "model": "FS_GRAPH",
+      "ratio": 0.7452639643712166
+    },
+    {
+      "split": "test",
+      "k": 10,
+      "model": "FS_LIN5_lam",
+      "ratio": 0.6744566023315748
+    },
+    {
+      "split": "test",
+      "k": 10,
+      "model": "FS_LIN5x",
+      "ratio": 0.6703823745780082
+    },
+    {
+      "split": "test",
+      "k": 10,
+      "model": "FS_MLP",
+      "ratio": 0.8361328114393386
+    },
+    {
+      "split": "test",
+      "k": 10,
+      "model": "MID",
+      "ratio": 1.0
+    },
+    {
+      "split": "test",
+      "k": 10,
+      "model": "MIN",
+      "ratio": 1.171627379402065
+    },
+    {
+      "split": "test",
+      "k": 10,
+      "model": "NET_ATT",
+      "ratio": 0.5150571559110075
+    },
+    {
+      "split": "test",
+      "k": 10,
+      "model": "NET_MLP",
+      "ratio": 0.5165214703268936
+    },
+    {
+      "split": "test",
+      "k": 10,
+      "model": "v1F",
+      "ratio": 1.6582001203202443
+    },
+    {
+      "split": "test",
+      "k": 10,
+      "model": "v1O",
+      "ratio": 1.4730702283288277
+    },
+    {
+      "split": "test",
+      "k": 10,
+      "model": "v1R",
+      "ratio": 0.49314732097761643
+    },
+    {
+      "split": "test",
+      "k": 20,
+      "model": "ADD",
+      "ratio": 1.2652436659389577
+    },
+    {
+      "split": "test",
+      "k": 20,
+      "model": "FS_EMB_GenePT",
+      "ratio": 0.512554225808972
+    },
+    {
+      "split": "test",
+      "k": 20,
+      "model": "FS_EMB_Geneformer",
+      "ratio": 0.5113431016163345
+    },
+    {
+      "split": "test",
+      "k": 20,
+      "model": "FS_EMB_scGPT",
+      "ratio": 0.5138292211123294
+    },
+    {
+      "split": "test",
+      "k": 20,
+      "model": "FS_GBM",
+      "ratio": 0.4990512611810331
+    },
+    {
+      "split": "test",
+      "k": 20,
+      "model": "FS_GRAPH",
+      "ratio": 0.5039453947693225
+    },
+    {
+      "split": "test",
+      "k": 20,
+      "model": "FS_LIN5_lam",
+      "ratio": 0.4600512968416585
+    },
+    {
+      "split": "test",
+      "k": 20,
+      "model": "FS_LIN5x",
+      "ratio": 0.4559291731975285
+    },
+    {
+      "split": "test",
+      "k": 20,
+      "model": "FS_MLP",
+      "ratio": 0.5287220141571077
+    },
+    {
+      "split": "test",
+      "k": 20,
+      "model": "MID",
+      "ratio": 1.0
+    },
+    {
+      "split": "test",
+      "k": 20,
+      "model": "MIN",
+      "ratio": 1.171591412602997
+    },
+    {
+      "split": "test",
+      "k": 20,
+      "model": "NET_ATT",
+      "ratio": 0.42490859812304244
+    },
+    {
+      "split": "test",
+      "k": 20,
+      "model": "NET_MLP",
+      "ratio": 0.4244436148866093
+    },
+    {
+      "split": "test",
+      "k": 20,
+      "model": "v1F",
+      "ratio": 1.6580639626845328
+    },
+    {
+      "split": "test",
+      "k": 20,
+      "model": "v1O",
+      "ratio": 1.4729850641546407
+    },
+    {
+      "split": "test",
+      "k": 20,
+      "model": "v1R",
+      "ratio": 0.43547226726180494
+    },
+    {
+      "split": "test",
+      "k": 50,
+      "model": "ADD",
+      "ratio": 1.2652527773542384
+    },
+    {
+      "split": "test",
+      "k": 50,
+      "model": "FS_EMB_GenePT",
+      "ratio": 0.4175201859946331
+    },
+    {
+      "split": "test",
+      "k": 50,
+      "model": "FS_EMB_Geneformer",
+      "ratio": 0.4188868648782246
+    },
+    {
+      "split": "test",
+      "k": 50,
+      "model": "FS_EMB_scGPT",
+      "ratio": 0.4172676234375961
+    },
+    {
+      "split": "test",
+      "k": 50,
+      "model": "FS_GBM",
+      "ratio": 0.4193264279842453
+    },
+    {
+      "split": "test",
+      "k": 50,
+      "model": "FS_GRAPH",
+      "ratio": 0.4161185270427155
+    },
+    {
+      "split": "test",
+      "k": 50,
+      "model": "FS_LIN5_lam",
+      "ratio": 0.39278442321719004
+    },
+    {
+      "split": "test",
+      "k": 50,
+      "model": "FS_LIN5x",
+      "ratio": 0.4095721538704749
+    },
+    {
+      "split": "test",
+      "k": 50,
+      "model": "FS_MLP",
+      "ratio": 0.4202940684806424
+    },
+    {
+      "split": "test",
+      "k": 50,
+      "model": "MID",
+      "ratio": 1.0
+    },
+    {
+      "split": "test",
+      "k": 50,
+      "model": "MIN",
+      "ratio": 1.171596388154022
+    },
+    {
+      "split": "test",
+      "k": 50,
+      "model": "NET_ATT",
+      "ratio": 0.3813632038425215
+    },
+    {
+      "split": "test",
+      "k": 50,
+      "model": "NET_MLP",
+      "ratio": 0.3811271982920367
+    },
+    {
+      "split": "test",
+      "k": 50,
+      "model": "v1F",
+      "ratio": 1.6581647742027568
+    },
+    {
+      "split": "test",
+      "k": 50,
+      "model": "v1O",
+      "ratio": 1.4731397067935579
+    },
+    {
+      "split": "test",
+      "k": 50,
+      "model": "v1R",
+      "ratio": 0.38774717306342066
+    }
+  ],
+  "shipped_pairs_by_lab": {
+    "BURGOLD25": 16940,
+    "CHYMERA20": 686,
+    "DEDE20": 403,
+    "DIEHL21": 10720,
+    "HARLE25": 472,
+    "HORLBECK18": 103953,
+    "IN4MER24": 4521,
+    "ITO21": 5065,
+    "NAJM18": 300,
+    "PARRISH21": 1030,
+    "SHEN17": 2628,
+    "SLC25": 33162,
+    "SPIDR25": 149878,
+    "TANG22": 1225,
+    "THOMPSON21": 1186,
+    "WONG16": 1225,
+    "ZHAO18": 1275
+  },
+  "scope": "Point estimates use all published rows. Rank intervals use the tested leaderboard expectations. No restricted source data, fitting or retuning."
+}
