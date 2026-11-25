@@ -1,0 +1,864 @@
+{
+ "dev": {
+  "0": {
+   "MID": {
+    "ratio": 1.0,
+    "rank": 1,
+    "rank_lo": 1,
+    "rank_hi": 3
+   },
+   "GBM": {
+    "ratio": 1.08559295,
+    "rank": 2,
+    "rank_lo": 1,
+    "rank_hi": 6
+   },
+   "MIN": {
+    "ratio": 1.13471717,
+    "rank": 3,
+    "rank_lo": 1,
+    "rank_hi": 5
+   },
+   "v1O": {
+    "ratio": 1.19644351,
+    "rank": 4,
+    "rank_lo": 2,
+    "rank_hi": 6
+   },
+   "ADD": {
+    "ratio": 1.38850171,
+    "rank": 5,
+    "rank_lo": 2,
+    "rank_hi": 11
+   },
+   "v1F": {
+    "ratio": 1.49538647,
+    "rank": 6,
+    "rank_lo": 2,
+    "rank_hi": 12
+   },
+   "LIN5x": {
+    "ratio": 1.56354866,
+    "rank": 7,
+    "rank_lo": 4,
+    "rank_hi": 8
+   },
+   "EMB_Geneformer": {
+    "ratio": 1.79243638,
+    "rank": 8,
+    "rank_lo": 7,
+    "rank_hi": 10
+   },
+   "EMB_scGPT": {
+    "ratio": 1.83951153,
+    "rank": 9,
+    "rank_lo": 7,
+    "rank_hi": 10
+   },
+   "EMB_GenePT": {
+    "ratio": 1.93492276,
+    "rank": 10,
+    "rank_lo": 8,
+    "rank_hi": 12
+   },
+   "GRAPH": {
+    "ratio": 1.96454267,
+    "rank": 11,
+    "rank_lo": 9,
+    "rank_hi": 12
+   },
+   "MLP": {
+    "ratio": 2.07969367,
+    "rank": 12,
+    "rank_lo": 6,
+    "rank_hi": 12
+   }
+  },
+  "10": {
+   "NET_ATT": {
+    "ratio": 0.54933051,
+    "rank": 1,
+    "rank_lo": 1,
+    "rank_hi": 3
+   },
+   "NET_MLP": {
+    "ratio": 0.58640538,
+    "rank": 2,
+    "rank_lo": 2,
+    "rank_hi": 6
+   },
+   "v1R": {
+    "ratio": 0.60739189,
+    "rank": 3,
+    "rank_lo": 1,
+    "rank_hi": 10
+   },
+   "FS_LIN5x": {
+    "ratio": 0.66012028,
+    "rank": 4,
+    "rank_lo": 3,
+    "rank_hi": 6
+   },
+   "FS_LIN5_lam": {
+    "ratio": 0.66116885,
+    "rank": 5,
+    "rank_lo": 2,
+    "rank_hi": 7
+   },
+   "FS_GBM": {
+    "ratio": 0.67022122,
+    "rank": 6,
+    "rank_lo": 3,
+    "rank_hi": 6
+   },
+   "FS_EMB_Geneformer": {
+    "ratio": 0.71026666,
+    "rank": 7,
+    "rank_lo": 6,
+    "rank_hi": 8
+   },
+   "FS_GRAPH": {
+    "ratio": 0.71534875,
+    "rank": 8,
+    "rank_lo": 7,
+    "rank_hi": 11
+   },
+   "FS_EMB_GenePT": {
+    "ratio": 0.72218536,
+    "rank": 9,
+    "rank_lo": 7,
+    "rank_hi": 11
+   },
+   "FS_EMB_scGPT": {
+    "ratio": 0.72651982,
+    "rank": 10,
+    "rank_lo": 7,
+    "rank_hi": 11
+   },
+   "FS_MLP": {
+    "ratio": 0.75213307,
+    "rank": 11,
+    "rank_lo": 7,
+    "rank_hi": 12
+   },
+   "MID": {
+    "ratio": 1.0,
+    "rank": 12,
+    "rank_lo": 11,
+    "rank_hi": 14
+   },
+   "MIN": {
+    "ratio": 1.13484462,
+    "rank": 13,
+    "rank_lo": 12,
+    "rank_hi": 15
+   },
+   "v1O": {
+    "ratio": 1.19635401,
+    "rank": 14,
+    "rank_lo": 13,
+    "rank_hi": 15
+   },
+   "ADD": {
+    "ratio": 1.38839093,
+    "rank": 15,
+    "rank_lo": 13,
+    "rank_hi": 16
+   },
+   "v1F": {
+    "ratio": 1.49556862,
+    "rank": 16,
+    "rank_lo": 13,
+    "rank_hi": 16
+   }
+  },
+  "20": {
+   "NET_ATT": {
+    "ratio": 0.47185043,
+    "rank": 1,
+    "rank_lo": 1,
+    "rank_hi": 4
+   },
+   "v1R": {
+    "ratio": 0.50407706,
+    "rank": 2,
+    "rank_lo": 1,
+    "rank_hi": 8
+   },
+   "NET_MLP": {
+    "ratio": 0.50546519,
+    "rank": 3,
+    "rank_lo": 2,
+    "rank_hi": 7
+   },
+   "FS_LIN5_lam": {
+    "ratio": 0.50693202,
+    "rank": 4,
+    "rank_lo": 1,
+    "rank_hi": 6
+   },
+   "FS_LIN5x": {
+    "ratio": 0.51297926,
+    "rank": 5,
+    "rank_lo": 2,
+    "rank_hi": 6
+   },
+   "FS_GBM": {
+    "ratio": 0.52284728,
+    "rank": 6,
+    "rank_lo": 2,
+    "rank_hi": 6
+   },
+   "FS_EMB_Geneformer": {
+    "ratio": 0.56194374,
+    "rank": 7,
+    "rank_lo": 7,
+    "rank_hi": 9
+   },
+   "FS_GRAPH": {
+    "ratio": 0.56409161,
+    "rank": 8,
+    "rank_lo": 6,
+    "rank_hi": 9
+   },
+   "FS_EMB_scGPT": {
+    "ratio": 0.56865738,
+    "rank": 9,
+    "rank_lo": 7,
+    "rank_hi": 9
+   },
+   "FS_EMB_GenePT": {
+    "ratio": 0.590009,
+    "rank": 10,
+    "rank_lo": 10,
+    "rank_hi": 11
+   },
+   "FS_MLP": {
+    "ratio": 0.60463355,
+    "rank": 11,
+    "rank_lo": 10,
+    "rank_hi": 11
+   },
+   "MID": {
+    "ratio": 1.0,
+    "rank": 12,
+    "rank_lo": 12,
+    "rank_hi": 13
+   },
+   "MIN": {
+    "ratio": 1.13450357,
+    "rank": 13,
+    "rank_lo": 12,
+    "rank_hi": 15
+   },
+   "v1O": {
+    "ratio": 1.1968438,
+    "rank": 14,
+    "rank_lo": 13,
+    "rank_hi": 15
+   },
+   "ADD": {
+    "ratio": 1.38842584,
+    "rank": 15,
+    "rank_lo": 13,
+    "rank_hi": 16
+   },
+   "v1F": {
+    "ratio": 1.49550431,
+    "rank": 16,
+    "rank_lo": 13,
+    "rank_hi": 16
+   }
+  },
+  "50": {
+   "NET_ATT": {
+    "ratio": 0.41005124,
+    "rank": 1,
+    "rank_lo": 1,
+    "rank_hi": 10
+   },
+   "FS_LIN5_lam": {
+    "ratio": 0.4269421,
+    "rank": 2,
+    "rank_lo": 1,
+    "rank_hi": 5
+   },
+   "v1R": {
+    "ratio": 0.42929284,
+    "rank": 3,
+    "rank_lo": 1,
+    "rank_hi": 11
+   },
+   "FS_GBM": {
+    "ratio": 0.43066626,
+    "rank": 4,
+    "rank_lo": 2,
+    "rank_hi": 11
+   },
+   "FS_MLP": {
+    "ratio": 0.43256182,
+    "rank": 5,
+    "rank_lo": 2,
+    "rank_hi": 9
+   },
+   "FS_LIN5x": {
+    "ratio": 0.43301726,
+    "rank": 6,
+    "rank_lo": 3,
+    "rank_hi": 8
+   },
+   "FS_GRAPH": {
+    "ratio": 0.43532548,
+    "rank": 7,
+    "rank_lo": 2,
+    "rank_hi": 10
+   },
+   "FS_EMB_GenePT": {
+    "ratio": 0.43642562,
+    "rank": 8,
+    "rank_lo": 3,
+    "rank_hi": 11
+   },
+   "NET_MLP": {
+    "ratio": 0.43765274,
+    "rank": 9,
+    "rank_lo": 2,
+    "rank_hi": 11
+   },
+   "FS_EMB_Geneformer": {
+    "ratio": 0.43798133,
+    "rank": 10,
+    "rank_lo": 6,
+    "rank_hi": 11
+   },
+   "FS_EMB_scGPT": {
+    "ratio": 0.43806507,
+    "rank": 11,
+    "rank_lo": 4,
+    "rank_hi": 11
+   },
+   "MID": {
+    "ratio": 1.0,
+    "rank": 12,
+    "rank_lo": 12,
+    "rank_hi": 14
+   },
+   "MIN": {
+    "ratio": 1.13385407,
+    "rank": 13,
+    "rank_lo": 12,
+    "rank_hi": 15
+   },
+   "v1O": {
+    "ratio": 1.19569183,
+    "rank": 14,
+    "rank_lo": 13,
+    "rank_hi": 15
+   },
+   "ADD": {
+    "ratio": 1.3887608,
+    "rank": 15,
+    "rank_lo": 13,
+    "rank_hi": 16
+   },
+   "v1F": {
+    "ratio": 1.49501027,
+    "rank": 16,
+    "rank_lo": 13,
+    "rank_hi": 16
+   }
+  }
+ },
+ "test": {
+  "0": {
+   "MID": {
+    "ratio": 1.0,
+    "rank": 1,
+    "rank_lo": 1,
+    "rank_hi": 4
+   },
+   "GBM": {
+    "ratio": 1.08306045,
+    "rank": 2,
+    "rank_lo": 1,
+    "rank_hi": 3
+   },
+   "MIN": {
+    "ratio": 1.17160177,
+    "rank": 3,
+    "rank_lo": 1,
+    "rank_hi": 6
+   },
+   "ADD": {
+    "ratio": 1.26521347,
+    "rank": 4,
+    "rank_lo": 1,
+    "rank_hi": 12
+   },
+   "v1O": {
+    "ratio": 1.47292526,
+    "rank": 5,
+    "rank_lo": 4,
+    "rank_hi": 9
+   },
+   "LIN5x": {
+    "ratio": 1.60436972,
+    "rank": 6,
+    "rank_lo": 4,
+    "rank_hi": 9
+   },
+   "v1F": {
+    "ratio": 1.65815783,
+    "rank": 7,
+    "rank_lo": 2,
+    "rank_hi": 12
+   },
+   "GRAPH": {
+    "ratio": 1.81082825,
+    "rank": 8,
+    "rank_lo": 5,
+    "rank_hi": 9
+   },
+   "EMB_Geneformer": {
+    "ratio": 1.88878907,
+    "rank": 9,
+    "rank_lo": 6,
+    "rank_hi": 11
+   },
+   "EMB_scGPT": {
+    "ratio": 1.95125618,
+    "rank": 10,
+    "rank_lo": 8,
+    "rank_hi": 11
+   },
+   "EMB_GenePT": {
+    "ratio": 1.99341065,
+    "rank": 11,
+    "rank_lo": 6,
+    "rank_hi": 12
+   },
+   "MLP": {
+    "ratio": 2.12089979,
+    "rank": 12,
+    "rank_lo": 4,
+    "rank_hi": 12
+   }
+  },
+  "10": {
+   "v1R": {
+    "ratio": 0.49314732,
+    "rank": 1,
+    "rank_lo": 1,
+    "rank_hi": 3
+   },
+   "NET_ATT": {
+    "ratio": 0.51505716,
+    "rank": 2,
+    "rank_lo": 1,
+    "rank_hi": 3
+   },
+   "NET_MLP": {
+    "ratio": 0.51652147,
+    "rank": 3,
+    "rank_lo": 1,
+    "rank_hi": 3
+   },
+   "FS_LIN5x": {
+    "ratio": 0.67038237,
+    "rank": 4,
+    "rank_lo": 4,
+    "rank_hi": 6
+   },
+   "FS_LIN5_lam": {
+    "ratio": 0.6744566,
+    "rank": 5,
+    "rank_lo": 4,
+    "rank_hi": 9
+   },
+   "FS_GBM": {
+    "ratio": 0.71996437,
+    "rank": 6,
+    "rank_lo": 6,
+    "rank_hi": 10
+   },
+   "FS_GRAPH": {
+    "ratio": 0.74526396,
+    "rank": 7,
+    "rank_lo": 6,
+    "rank_hi": 9
+   },
+   "FS_EMB_scGPT": {
+    "ratio": 0.75751343,
+    "rank": 8,
+    "rank_lo": 4,
+    "rank_hi": 12
+   },
+   "FS_EMB_GenePT": {
+    "ratio": 0.76660413,
+    "rank": 9,
+    "rank_lo": 7,
+    "rank_hi": 11
+   },
+   "FS_EMB_Geneformer": {
+    "ratio": 0.76899323,
+    "rank": 10,
+    "rank_lo": 8,
+    "rank_hi": 12
+   },
+   "FS_MLP": {
+    "ratio": 0.83613281,
+    "rank": 11,
+    "rank_lo": 11,
+    "rank_hi": 13
+   },
+   "MID": {
+    "ratio": 1.0,
+    "rank": 12,
+    "rank_lo": 6,
+    "rank_hi": 13
+   },
+   "MIN": {
+    "ratio": 1.17162738,
+    "rank": 13,
+    "rank_lo": 12,
+    "rank_hi": 16
+   },
+   "ADD": {
+    "ratio": 1.26522742,
+    "rank": 14,
+    "rank_lo": 2,
+    "rank_hi": 16
+   },
+   "v1O": {
+    "ratio": 1.47307023,
+    "rank": 15,
+    "rank_lo": 14,
+    "rank_hi": 16
+   },
+   "v1F": {
+    "ratio": 1.65820012,
+    "rank": 16,
+    "rank_lo": 10,
+    "rank_hi": 16
+   }
+  },
+  "20": {
+   "NET_MLP": {
+    "ratio": 0.42444361,
+    "rank": 1,
+    "rank_lo": 1,
+    "rank_hi": 3
+   },
+   "NET_ATT": {
+    "ratio": 0.4249086,
+    "rank": 2,
+    "rank_lo": 1,
+    "rank_hi": 4
+   },
+   "v1R": {
+    "ratio": 0.43547227,
+    "rank": 3,
+    "rank_lo": 1,
+    "rank_hi": 4
+   },
+   "FS_LIN5x": {
+    "ratio": 0.45592917,
+    "rank": 4,
+    "rank_lo": 3,
+    "rank_hi": 4
+   },
+   "FS_LIN5_lam": {
+    "ratio": 0.4600513,
+    "rank": 5,
+    "rank_lo": 4,
+    "rank_hi": 5
+   },
+   "FS_GBM": {
+    "ratio": 0.49905126,
+    "rank": 6,
+    "rank_lo": 6,
+    "rank_hi": 8
+   },
+   "FS_GRAPH": {
+    "ratio": 0.50394539,
+    "rank": 7,
+    "rank_lo": 6,
+    "rank_hi": 8
+   },
+   "FS_EMB_Geneformer": {
+    "ratio": 0.5113431,
+    "rank": 8,
+    "rank_lo": 7,
+    "rank_hi": 10
+   },
+   "FS_EMB_GenePT": {
+    "ratio": 0.51255423,
+    "rank": 9,
+    "rank_lo": 8,
+    "rank_hi": 10
+   },
+   "FS_EMB_scGPT": {
+    "ratio": 0.51382922,
+    "rank": 10,
+    "rank_lo": 8,
+    "rank_hi": 11
+   },
+   "FS_MLP": {
+    "ratio": 0.52872201,
+    "rank": 11,
+    "rank_lo": 10,
+    "rank_hi": 12
+   },
+   "MID": {
+    "ratio": 1.0,
+    "rank": 12,
+    "rank_lo": 12,
+    "rank_hi": 13
+   },
+   "MIN": {
+    "ratio": 1.17159141,
+    "rank": 13,
+    "rank_lo": 12,
+    "rank_hi": 16
+   },
+   "ADD": {
+    "ratio": 1.26524367,
+    "rank": 14,
+    "rank_lo": 6,
+    "rank_hi": 16
+   },
+   "v1O": {
+    "ratio": 1.47298506,
+    "rank": 15,
+    "rank_lo": 14,
+    "rank_hi": 16
+   },
+   "v1F": {
+    "ratio": 1.65806396,
+    "rank": 16,
+    "rank_lo": 13,
+    "rank_hi": 16
+   }
+  },
+  "50": {
+   "NET_MLP": {
+    "ratio": 0.3811272,
+    "rank": 1,
+    "rank_lo": 1,
+    "rank_hi": 3
+   },
+   "NET_ATT": {
+    "ratio": 0.3813632,
+    "rank": 2,
+    "rank_lo": 1,
+    "rank_hi": 4
+   },
+   "v1R": {
+    "ratio": 0.38774717,
+    "rank": 3,
+    "rank_lo": 1,
+    "rank_hi": 11
+   },
+   "FS_LIN5_lam": {
+    "ratio": 0.39278442,
+    "rank": 4,
+    "rank_lo": 3,
+    "rank_hi": 5
+   },
+   "FS_LIN5x": {
+    "ratio": 0.40957215,
+    "rank": 5,
+    "rank_lo": 3,
+    "rank_hi": 5
+   },
+   "FS_GRAPH": {
+    "ratio": 0.41611853,
+    "rank": 6,
+    "rank_lo": 4,
+    "rank_hi": 11
+   },
+   "FS_EMB_scGPT": {
+    "ratio": 0.41726762,
+    "rank": 7,
+    "rank_lo": 6,
+    "rank_hi": 9
+   },
+   "FS_EMB_GenePT": {
+    "ratio": 0.41752019,
+    "rank": 8,
+    "rank_lo": 6,
+    "rank_hi": 9
+   },
+   "FS_EMB_Geneformer": {
+    "ratio": 0.41888686,
+    "rank": 9,
+    "rank_lo": 7,
+    "rank_hi": 10
+   },
+   "FS_GBM": {
+    "ratio": 0.41932643,
+    "rank": 10,
+    "rank_lo": 6,
+    "rank_hi": 11
+   },
+   "FS_MLP": {
+    "ratio": 0.42029407,
+    "rank": 11,
+    "rank_lo": 9,
+    "rank_hi": 11
+   },
+   "MID": {
+    "ratio": 1.0,
+    "rank": 12,
+    "rank_lo": 12,
+    "rank_hi": 13
+   },
+   "MIN": {
+    "ratio": 1.17159639,
+    "rank": 13,
+    "rank_lo": 12,
+    "rank_hi": 16
+   },
+   "ADD": {
+    "ratio": 1.26525278,
+    "rank": 14,
+    "rank_lo": 12,
+    "rank_hi": 16
+   },
+   "v1O": {
+    "ratio": 1.47313971,
+    "rank": 15,
+    "rank_lo": 14,
+    "rank_hi": 16
+   },
+   "v1F": {
+    "ratio": 1.65816477,
+    "rank": 16,
+    "rank_lo": 13,
+    "rank_hi": 16
+   }
+  }
+ },
+ "fresh": {
+  "0": {
+   "MID": {
+    "ratio": 1.0,
+    "rank": 1,
+    "rank_lo": 1,
+    "rank_hi": 1
+   },
+   "ADD": {
+    "ratio": 1.02839673,
+    "rank": 2,
+    "rank_lo": 2,
+    "rank_hi": 2
+   },
+   "v1O": {
+    "ratio": 1.08080975,
+    "rank": 3,
+    "rank_lo": 3,
+    "rank_hi": 3
+   },
+   "MIN": {
+    "ratio": 1.17654097,
+    "rank": 4,
+    "rank_lo": 4,
+    "rank_hi": 4
+   },
+   "v1F": {
+    "ratio": 1.18932356,
+    "rank": 5,
+    "rank_lo": 5,
+    "rank_hi": 5
+   }
+  },
+  "5": {
+   "MID": {
+    "ratio": 1.0,
+    "rank": 1,
+    "rank_lo": 1,
+    "rank_hi": 2
+   },
+   "ADD": {
+    "ratio": 1.02839746,
+    "rank": 2,
+    "rank_lo": 2,
+    "rank_hi": 3
+   },
+   "v1R": {
+    "ratio": 1.05390409,
+    "rank": 3,
+    "rank_lo": 1,
+    "rank_hi": 4
+   },
+   "v1O": {
+    "ratio": 1.08089778,
+    "rank": 4,
+    "rank_lo": 3,
+    "rank_hi": 4
+   },
+   "MIN": {
+    "ratio": 1.17663785,
+    "rank": 5,
+    "rank_lo": 5,
+    "rank_hi": 6
+   },
+   "v1F": {
+    "ratio": 1.18924891,
+    "rank": 6,
+    "rank_lo": 6,
+    "rank_hi": 7
+   },
+   "FS_LIN5_lam": {
+    "ratio": 1.34968922,
+    "rank": 7,
+    "rank_lo": 5,
+    "rank_hi": 7
+   }
+  },
+  "20": {
+   "v1R": {
+    "ratio": 0.94129501,
+    "rank": 1,
+    "rank_lo": 1,
+    "rank_hi": 1
+   },
+   "MID": {
+    "ratio": 1.0,
+    "rank": 2,
+    "rank_lo": 2,
+    "rank_hi": 3
+   },
+   "ADD": {
+    "ratio": 1.02858871,
+    "rank": 3,
+    "rank_lo": 3,
+    "rank_hi": 4
+   },
+   "FS_LIN5_lam": {
+    "ratio": 1.04577655,
+    "rank": 4,
+    "rank_lo": 2,
+    "rank_hi": 5
+   },
+   "v1O": {
+    "ratio": 1.08128294,
+    "rank": 5,
+    "rank_lo": 4,
+    "rank_hi": 5
+   },
+   "MIN": {
+    "ratio": 1.17664793,
+    "rank": 6,
+    "rank_lo": 6,
+    "rank_hi": 6
+   },
+   "v1F": {
+    "ratio": 1.1892463,
+    "rank": 7,
+    "rank_lo": 7,
+    "rank_hi": 7
+   }
+  }
+ }
+}
