@@ -82,7 +82,7 @@ ADD = sa + sb. MIN = min(sa, sb). MID = ½(ADD + MIN). FS_LIN5_lam fits a ridge 
 
 LIN5x, GBM and MLP use singles, STRING and paralog features. EMB_* uses frozen GenePT, Geneformer or scGPT embeddings, while GRAPH uses GEARS-style STRING propagation. NET_ATT is an 844,801-parameter set-attention meta-learner; NET_MLP is a 582,657-parameter residual MLP.
 
-The first tables show published results from the 22-lab benchmark. Ranks and intervals retain their original comparison sets. Shipped-data tables appear separately below. Rebuild the full leaderboard tables from the published error rows with `opal-bench-score table leaderboard/rows.csv.gz`.
+The first tables show published results from the 22-lab benchmark. Ranks and intervals retain their original comparison sets. Shipped-data tables appear separately below. Run `opal-bench-score table leaderboard/rows.csv.gz` to recompute ranks over the displayed methods.
 
 ## Main track: few-shot held-out lab
 

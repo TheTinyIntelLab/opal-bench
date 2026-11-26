@@ -74,7 +74,7 @@ opal-bench-score table leaderboard/rows.csv.gz  # Tables from the published rows
 
 ## Results
 
-On the locked test, a six-coefficient ridge fitted to 20 target pairs comes close to the larger networks, with overlapping bootstrap rank intervals.
+Of the two networks on the locked test, only NET_ATT's bootstrap rank interval overlaps the six-coefficient ridge's at k = 20.
 
 <img src="images/label_budget.svg" width="100%" alt="Six-coefficient ridge and official Opal K562 API scores across shipped calibration budgets." />
 
@@ -88,9 +88,9 @@ On the locked test, a six-coefficient ridge fitted to 20 target pairs comes clos
 | Six-coefficient ridge (FS_LIN5_lam) | 0.460 | 5 [4–5] |
 | MID | 1.000 | 12 [12–13] |
 
-<img src="images/locked_test.svg" width="100%" alt="The displayed locked-test methods at k = 20, with MSE ratios and bootstrap rank intervals. The small ridge and the largest networks have overlapping rank intervals." />
+<img src="images/locked_test.svg" width="100%" alt="Locked-test MSE ratios and bootstrap rank intervals at k = 20. Of the two networks, only NET_ATT's rank interval overlaps the six-coefficient ridge's." />
 
-The figures use the published per-draw rows, including aggregate results for the five restricted labs. You can re-score the built-in rules and few-shot ridge here. The [leaderboard](leaderboard/LEADERBOARD.md) records method provenance and the measured parameter counts, peak RAM and CPU seconds for reproducible baselines on the shipped data. It also shows the two exact network parameter counts recorded in the original run. Historical methods with missing run artifacts are listed with their published scores.
+The budget curves use the shipped scores in [shipped-fewshot.json](leaderboard/shipped-fewshot.json). The locked-test leaderboard figure uses the [published per-draw rows](leaderboard/rows.csv.gz), which include aggregate results for the five restricted labs. You can re-score the built-in rules and few-shot ridge here. The [leaderboard](leaderboard/LEADERBOARD.md) records method provenance and the measured parameter counts, peak RAM and CPU seconds for reproducible baselines on the shipped data. It also shows the two exact network parameter counts recorded in the original run. Historical methods with missing run artifacts are listed with their published scores.
 
 ### What did not transfer
 
