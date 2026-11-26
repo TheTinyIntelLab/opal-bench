@@ -2,7 +2,7 @@
 1. Built-in baselines re-scored on the shipped data equal the leaderboard rows for every shipped unit (dev, test, fresh).
 2. Leaderboard tables (ratios, ranks, rank CIs) rebuilt from leaderboard/rows.csv.gz equal tests/expected/leaderboard.json.
 3. Tasks a, a_fs20, b, c, d on the 17 shipped labs equal tests/expected/tasks_shipped.json.
-4. Opal v1 rows (v1F, v1R) re-scored if OPAL_V1_DIR points at the Opal v1 growth bundle (otherwise skipped)."""
+4. The official K562 API row is checked when OPAL_V1_DIR and the public release wheel are available."""
 import json, os, tempfile
 import numpy as np, pandas as pd
 HERE = os.path.dirname(os.path.abspath(__file__))
@@ -50,11 +50,21 @@ def test_tasks_shipped():
     assert abs(R["d"]["median_rho"] - exp["d"]["median_rho"]) < 1e-9
 
 def test_opal_v1_rows():
-    if not os.environ.get("OPAL_V1_DIR"):
-        print("skip: set OPAL_V1_DIR to re-score Opal v1"); return
-    from opal_bench.opal_v1 import methods
-    for s in ("dev", "test", "fresh"):
-        R = F.run(s, methods(), with_builtin=False); _match(R, s, ["v1F", "v1R"])
+    root = os.environ.get("OPAL_V1_DIR")
+    if not root:
+        return
+    from opal_bench.opal_v1 import API_METHOD, api_method
+
+    with open(os.path.join(HERE, "..", "leaderboard", "shipped-fewshot.json"), encoding="utf-8") as f:
+        expected = json.load(f)
+    methods = {API_METHOD: api_method(root)}
+    for split in F.SPLITS:
+        rows = F.run(split, methods)
+        summary = LB.summary(LB.tables(rows, n_boot=10))
+        assert {k: scores[API_METHOD] for k, scores in summary.items()} == {
+            k: scores[API_METHOD] for k, scores in expected[split].items()
+        }
+
 
 if __name__ == "__main__":
     for f in [test_fewshot_baselines_match_leaderboard_rows, test_leaderboard_tables, test_tasks_shipped, test_opal_v1_rows]:

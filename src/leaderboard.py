@@ -3,6 +3,8 @@ Ratio = geo-mean over labs of MSE/MSE_MID (units averaged within lab, draws with
 replicates, seed 0, over labs (dev) or labs then units within lab (test, fresh)."""
 import numpy as np, pandas as pd
 
+RETIRED_OPAL_METHODS = frozenset({"v1F", "v1R", "v1O"})
+
 def tables(R, n_boot=2000, seed=0):
     rng = np.random.default_rng(seed)
     MIDm = R[R.model == "MID"][["unit", "k", "draw", "mse"]].rename(columns={"mse": "mid"})
