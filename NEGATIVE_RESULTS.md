@@ -12,11 +12,9 @@ A rule-anchored zero-shot model also failed. It learned a per-lab mixing weight 
 
 Frozen GenePT, Geneformer and scGPT embeddings, and GEARS-style STRING propagation, each received a few-shot head. At k = 10 and 20, they performed worse than a six-coefficient ridge fitted only to the target pairs on both development labs and the locked test. At locked-test k = 20, their ratios were 0.50–0.53 against the ridge's 0.460.
 
-The 582,657- and 844,801-parameter networks scored 0.424 and 0.425 on that test. The refitted Opal architecture scored 0.435. Their rank intervals overlap, so the leaderboard doesn't separate them cleanly.
+The 582,657- and 844,801-parameter networks scored 0.424 and 0.425 on that test. Their rank intervals overlap, so the leaderboard doesn't separate them cleanly.
 
 ## Screen transfer and pair selection failed
-
-Frozen Opal v1, trained on K562 CRISPRi, scored 1.50× MID on development labs and 1.66× on the locked test. The official API abstained on 85–99% of pairs.
 
 ATLAS adds half a pair's mean cross-lab interaction to MID. That raised held-out-lab MSE to 1.29× MID, although it improved strong-negative ranking, with AUROC 0.795 against 0.708. Bayesian D-optimal selection, stratification by singles and atlas-uncertainty selection each performed worse than random calibration-pair selection on development labs.
 
@@ -63,3 +61,15 @@ These experiments weren't registered and should be read separately from the conf
 - E10b found a small singles-free interaction-ranking signal, with median correlation 0.026, carried entirely by paralog and STRING pairs.
 - E10c found that gene-feature classifiers lost to the zero-fit additive − min rule on strong negative interactions in 12–13/19 labs. On held-out genes, gene-feature models were 1.31–1.41× worse than an in-lab five-parameter linear rule, so their random-split gains didn't carry over to unseen genes.
 - E10d rank-averaged the rule and a gene classifier. It didn't beat both inputs.
+
+## What the supplemental scores test
+
+The earlier held-out-gene pilot measured transfer within a lab. The supplemental track tests transfer to genes missing from the allowed cross-lab training roster and the current calibration draw.
+
+On the shipped locked-test screen at k = 20, the six-coefficient ridge places more measured buffering hits in its top 5% than MID does. On fresh SHEN26 at the same budget, it places fewer. The [supplemental leaderboard](leaderboard/LEADERBOARD.md#supplemental-tracks) gives both tails and their settings. Low-budget uncertainty results use an allowed training screen to estimate the interval radius, so coverage on the target measures how well that radius transfers. The [prospective protocol](PROSPECTIVE.md) requires a frozen entry and a later eligible screen release.
+
+### Shipped embedding baselines
+
+At k = 20 on SHEN26, each of the nine embedding heads had higher growth error than the singles-only ridge. The test uses pinned representations with a common 39-coefficient ridge head. The [few-shot comparison](leaderboard/shipped-fewshot.json) records the ratios.
+
+The shipped `Opal-v1-API-K562` run abstained on every fresh SHEN26 pair, so its predictions there reduce to MID. Its measured results use the pinned K562 source checkpoint and the benchmark's MID fallback. [API baseline](README.md#official-opal-v1-api)

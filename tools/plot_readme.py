@@ -12,6 +12,8 @@ import matplotlib.pyplot as plt
 from matplotlib.patches import FancyArrowPatch, FancyBboxPatch
 import numpy as np
 import pandas as pd
+from opal_bench.leaderboard import RETIRED_OPAL_METHODS
+from opal_bench.opal_v1 import API_METHOD
 
 ROOT = Path(__file__).resolve().parents[1]
 OUT = ROOT / "images"
@@ -61,20 +63,20 @@ def budget_curves(ratios):
     fig, axes = plt.subplots(1, 2, figsize=(12, 5.4), gridspec_kw={"wspace": 0.28})
     fig.subplots_adjust(top=0.74, bottom=0.19)
     fig.suptitle("A few measured pairs change the comparison", x=0.08, y=1.01, ha="left", fontsize=16, weight="bold")
-    series = [("FS_LIN5_lam", "Six-coefficient ridge", TEAL, "o"), ("v1R", "Opal refit", GOLD, "s"), ("v1F", "Opal frozen", STONE, "^")]
-    for ax, split, title, ks in zip(axes, ("test", "fresh"), ("Locked test · 4 labs / 31 cell lines", "Fresh SHEN26 · 2 cell lines"), ([0, 10, 20, 50], [0, 5, 20])):
+    series = [("FS_LIN5_lam", "Six-coefficient ridge", TEAL, "o"), (API_METHOD, "Opal K562 API", GOLD, "s")]
+    for ax, split, title, ks in zip(axes, ("test", "fresh"), ("Shipped locked test · 1 cell line", "Fresh SHEN26 · 2 cell lines"), ([0, 10, 20, 50], [0, 5, 20])):
         ax.set_title(title, loc="left", fontsize=11, pad=16)
         ax.axhline(1, color=INK, linewidth=1, linestyle=(0, (4, 3)))
         ax.text(0.98, 1.025, "MID = 1", transform=ax.get_yaxis_transform(), ha="right", fontsize=9, color=MUTED)
         for method, label, color, marker in series:
             values = ratios[(ratios.split == split) & (ratios.model == method)].sort_values("k")
             ax.plot(values.k, values.ratio, marker=marker, markersize=5, color=color, linewidth=2, label=label)
-        ax.set(xticks=ks, xlabel="Measured target pairs (k)", ylabel="MSE / MID · lower is better", ylim=(0.25 if split == "test" else 0.85, 1.9 if split == "test" else 1.48))
+        ax.set(xticks=ks, xlabel="Measured target pairs (k)", ylabel="MSE / MID · lower is better", ylim=(0.05, 1.15) if split == "test" else (0.85, 1.48))
         ax.grid(axis="y", color=GRID, linewidth=0.7)
         ax.set_axisbelow(True)
     handles, labels = axes[0].get_legend_handles_labels()
     fig.legend(handles, labels, loc="upper left", bbox_to_anchor=(0.075, 0.93), ncol=3, frameon=False, fontsize=10)
-    fig.text(0.08, 0.025, "Full leaderboard point estimates; no uncertainty bands. Missing k = 0 points indicate methods that require calibration pairs.", fontsize=9, color=MUTED)
+    fig.text(0.08, 0.025, "Shipped-data point estimates. The ridge requires calibration pairs.", fontsize=9, color=MUTED)
     save(fig, "label_budget")
 
 
@@ -83,7 +85,7 @@ def locked_leaderboard(ratios, expected):
     fig, ax = plt.subplots(figsize=(12, 7.1))
     fig.subplots_adjust(left=0.23, right=0.79, top=0.84, bottom=0.13)
     fig.text(0.07, 0.96, "Locked test · 20 measured pairs", fontsize=16, weight="bold")
-    fig.text(0.07, 0.905, "All 16 methods · 4 labs · 31 cell lines · lower is better", fontsize=11, color=MUTED)
+    fig.text(0.07, 0.905, f"{len(table)} displayed methods · 4 labs · 31 cell lines · lower is better", fontsize=11, color=MUTED)
     colors = [TEAL if m == "FS_LIN5_lam" else INK if m == "MID" else STONE for m in table.model]
     ax.barh(np.arange(len(table)), table.ratio, color=colors, height=0.63)
     ax.set(yticks=np.arange(len(table)), yticklabels=table.model, xlabel="MSE / MID", xlim=(0, 1.86))
@@ -99,7 +101,7 @@ def locked_leaderboard(ratios, expected):
         ax.text(row.ratio+0.025, y, f"{row.ratio:.3f}", va="center", fontsize=9)
         ax.text(1.08, y, f"{e['rank']} [{e['rank_lo']}–{e['rank_hi']}]", transform=ax.get_yaxis_transform(), va="center", fontsize=9, color=MUTED)
     ax.text(1.08, 1.035, "Rank [95% CI]", transform=ax.transAxes, fontsize=9, color=MUTED)
-    fig.text(0.07, 0.025, "Rank intervals: 2,000 bootstrap replicates over labs, then cell lines. Intervals describe rank, not MSE uncertainty.", fontsize=9, color=MUTED)
+    fig.text(0.07, 0.025, "Published ranks and intervals use the original comparison and 2,000 bootstrap replicates.", fontsize=9, color=MUTED)
     save(fig, "locked_test")
 
 
@@ -124,8 +126,10 @@ def coverage(pairs):
 def main():
     OUT.mkdir(exist_ok=True)
     rows_path = ROOT / "leaderboard/rows.csv.gz"
+    shipped_path = ROOT / "leaderboard/shipped-fewshot.json"
     pairs_path = ROOT / "data/redistributable/bench_pairs.csv.gz"
     rows = pd.read_csv(rows_path)
+    rows = rows[~rows.model.isin(RETIRED_OPAL_METHODS)]
     keys = ["split", "unit", "k", "draw"]
     mid = rows[rows.model == "MID"][keys + ["mse"]].rename(columns={"mse": "mid"})
     joined = rows.merge(mid, on=keys, validate="many_to_one")
@@ -136,21 +140,28 @@ def main():
     expected = json.loads((ROOT / "tests/expected/leaderboard.json").read_text(encoding="utf-8"))
     for row in ratios.itertuples():
         assert abs(row.ratio - expected[row.split][str(row.k)][row.model]["ratio"]) < 1e-6
+    shipped = json.loads(shipped_path.read_text(encoding="utf-8"))
+    budget_ratios = pd.DataFrame([
+        {"split": split, "k": int(k), "model": method, "ratio": ratio}
+        for split in ("test", "fresh") for k, methods in shipped[split].items()
+        for method, ratio in methods.items() if method in ("FS_LIN5_lam", API_METHOD)
+    ])
     pairs = pd.read_csv(pairs_path)
     assert len(pairs) == 334669 and pairs.lab.nunique() == 17
     overview()
-    budget_curves(ratios)
+    budget_curves(budget_ratios)
     locked_leaderboard(ratios, expected)
     coverage(pairs)
     provenance = {
-        "sources": {str(p.relative_to(ROOT)): hashlib.sha256(p.read_bytes()).hexdigest() for p in (rows_path, pairs_path, ROOT / "tests/expected/leaderboard.json")},
+        "sources": {str(p.relative_to(ROOT)): hashlib.sha256(p.read_bytes()).hexdigest() for p in (rows_path, shipped_path, pairs_path, ROOT / "tests/expected/leaderboard.json")},
         "metric": "exp(mean_labs(mean_units(mean_draws(log(MSE / MSE_MID)))))",
         "ratios": ratios.to_dict(orient="records"),
+        "budget_figure_ratios": budget_ratios.to_dict(orient="records"),
         "shipped_pairs_by_lab": pairs.groupby("lab").size().to_dict(),
-        "scope": "Point estimates use all published rows. Rank intervals use the tested leaderboard expectations. No restricted source data, fitting or retuning.",
+        "scope": "Budget curves use shipped-data scores. The locked-test plot shows published historical ranks for the displayed methods.",
     }
     (OUT / "figure_data.json").write_text(json.dumps(provenance, indent=2) + "\n", encoding="utf-8")
-    print("Built four SVG figures; all ratios match the benchmark expectations.")
+    print("Built four SVG figures and verified the historical ratios.")
 
 
 if __name__ == "__main__":

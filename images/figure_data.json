@@ -1,6 +1,7 @@
 {
   "sources": {
     "leaderboard\\rows.csv.gz": "b38f0e86021299f1e89afa014611173a4f51eb30b5d81f18641e35e3abf3892b",
+    "leaderboard\\shipped-fewshot.json": "13ce48ab5ab9ee87dda76bcf49694f3eda26847e28540245f9f9d00aaec5f6b8",
     "data\\redistributable\\bench_pairs.csv.gz": "2328c2efd9be4c4a01fa7946f9616a4201865b63113c735517f7a3f57c017d0c",
     "tests\\expected\\leaderboard.json": "04172c7fc596b000b53ddd70016cd457d25e081aa83e794863f43948ee5193ab"
   },
@@ -65,18 +66,6 @@
       "k": 0,
       "model": "MLP",
       "ratio": 2.0796936667552512
-    },
-    {
-      "split": "dev",
-      "k": 0,
-      "model": "v1F",
-      "ratio": 1.4953864708196323
-    },
-    {
-      "split": "dev",
-      "k": 0,
-      "model": "v1O",
-      "ratio": 1.1964435051047282
     },
     {
       "split": "dev",
@@ -158,24 +147,6 @@
     },
     {
       "split": "dev",
-      "k": 10,
-      "model": "v1F",
-      "ratio": 1.495568621576586
-    },
-    {
-      "split": "dev",
-      "k": 10,
-      "model": "v1O",
-      "ratio": 1.196354006035408
-    },
-    {
-      "split": "dev",
-      "k": 10,
-      "model": "v1R",
-      "ratio": 0.6073918863314418
-    },
-    {
-      "split": "dev",
       "k": 20,
       "model": "ADD",
       "ratio": 1.3884258434470658
@@ -251,24 +222,6 @@
       "k": 20,
       "model": "NET_MLP",
       "ratio": 0.5054651874263076
-    },
-    {
-      "split": "dev",
-      "k": 20,
-      "model": "v1F",
-      "ratio": 1.4955043116352276
-    },
-    {
-      "split": "dev",
-      "k": 20,
-      "model": "v1O",
-      "ratio": 1.19684380401098
-    },
-    {
-      "split": "dev",
-      "k": 20,
-      "model": "v1R",
-      "ratio": 0.504077056658028
     },
     {
       "split": "dev",
@@ -349,24 +302,6 @@
       "ratio": 0.4376527423574275
     },
     {
-      "split": "dev",
-      "k": 50,
-      "model": "v1F",
-      "ratio": 1.4950102670794871
-    },
-    {
-      "split": "dev",
-      "k": 50,
-      "model": "v1O",
-      "ratio": 1.1956918272895118
-    },
-    {
-      "split": "dev",
-      "k": 50,
-      "model": "v1R",
-      "ratio": 0.429292844218187
-    },
-    {
       "split": "fresh",
       "k": 0,
       "model": "ADD",
@@ -383,18 +318,6 @@
       "k": 0,
       "model": "MIN",
       "ratio": 1.1765409748499673
-    },
-    {
-      "split": "fresh",
-      "k": 0,
-      "model": "v1F",
-      "ratio": 1.1893235597556508
-    },
-    {
-      "split": "fresh",
-      "k": 0,
-      "model": "v1O",
-      "ratio": 1.0808097452986358
     },
     {
       "split": "fresh",
@@ -422,24 +345,6 @@
     },
     {
       "split": "fresh",
-      "k": 5,
-      "model": "v1F",
-      "ratio": 1.1892489126545025
-    },
-    {
-      "split": "fresh",
-      "k": 5,
-      "model": "v1O",
-      "ratio": 1.0808977822222103
-    },
-    {
-      "split": "fresh",
-      "k": 5,
-      "model": "v1R",
-      "ratio": 1.053904091501524
-    },
-    {
-      "split": "fresh",
       "k": 20,
       "model": "ADD",
       "ratio": 1.0285887080257168
@@ -461,24 +366,6 @@
       "k": 20,
       "model": "MIN",
       "ratio": 1.17664792718695
-    },
-    {
-      "split": "fresh",
-      "k": 20,
-      "model": "v1F",
-      "ratio": 1.1892463012691044
-    },
-    {
-      "split": "fresh",
-      "k": 20,
-      "model": "v1O",
-      "ratio": 1.081282942488963
-    },
-    {
-      "split": "fresh",
-      "k": 20,
-      "model": "v1R",
-      "ratio": 0.9412950054695267
     },
     {
       "split": "test",
@@ -539,18 +426,6 @@
       "k": 0,
       "model": "MLP",
       "ratio": 2.120899794720717
-    },
-    {
-      "split": "test",
-      "k": 0,
-      "model": "v1F",
-      "ratio": 1.6581578269916553
-    },
-    {
-      "split": "test",
-      "k": 0,
-      "model": "v1O",
-      "ratio": 1.4729252597971858
     },
     {
       "split": "test",
@@ -632,24 +507,6 @@
     },
     {
       "split": "test",
-      "k": 10,
-      "model": "v1F",
-      "ratio": 1.6582001203202443
-    },
-    {
-      "split": "test",
-      "k": 10,
-      "model": "v1O",
-      "ratio": 1.4730702283288277
-    },
-    {
-      "split": "test",
-      "k": 10,
-      "model": "v1R",
-      "ratio": 0.49314732097761643
-    },
-    {
-      "split": "test",
       "k": 20,
       "model": "ADD",
       "ratio": 1.2652436659389577
@@ -728,24 +585,6 @@
     },
     {
       "split": "test",
-      "k": 20,
-      "model": "v1F",
-      "ratio": 1.6580639626845328
-    },
-    {
-      "split": "test",
-      "k": 20,
-      "model": "v1O",
-      "ratio": 1.4729850641546407
-    },
-    {
-      "split": "test",
-      "k": 20,
-      "model": "v1R",
-      "ratio": 0.43547226726180494
-    },
-    {
-      "split": "test",
       "k": 50,
       "model": "ADD",
       "ratio": 1.2652527773542384
@@ -821,24 +660,80 @@
       "k": 50,
       "model": "NET_MLP",
       "ratio": 0.3811271982920367
+    }
+  ],
+  "budget_figure_ratios": [
+    {
+      "split": "test",
+      "k": 0,
+      "model": "Opal-v1-API-K562",
+      "ratio": 1.003695
+    },
+    {
+      "split": "test",
+      "k": 10,
+      "model": "FS_LIN5_lam",
+      "ratio": 0.2783
+    },
+    {
+      "split": "test",
+      "k": 10,
+      "model": "Opal-v1-API-K562",
+      "ratio": 1.003698
+    },
+    {
+      "split": "test",
+      "k": 20,
+      "model": "FS_LIN5_lam",
+      "ratio": 0.142271
+    },
+    {
+      "split": "test",
+      "k": 20,
+      "model": "Opal-v1-API-K562",
+      "ratio": 1.003698
     },
     {
       "split": "test",
       "k": 50,
-      "model": "v1F",
-      "ratio": 1.6581647742027568
+      "model": "FS_LIN5_lam",
+      "ratio": 0.121978
     },
     {
       "split": "test",
       "k": 50,
-      "model": "v1O",
-      "ratio": 1.4731397067935579
+      "model": "Opal-v1-API-K562",
+      "ratio": 1.00369
     },
     {
-      "split": "test",
-      "k": 50,
-      "model": "v1R",
-      "ratio": 0.38774717306342066
+      "split": "fresh",
+      "k": 0,
+      "model": "Opal-v1-API-K562",
+      "ratio": 1.0
+    },
+    {
+      "split": "fresh",
+      "k": 5,
+      "model": "Opal-v1-API-K562",
+      "ratio": 1.0
+    },
+    {
+      "split": "fresh",
+      "k": 5,
+      "model": "FS_LIN5_lam",
+      "ratio": 1.349689
+    },
+    {
+      "split": "fresh",
+      "k": 20,
+      "model": "Opal-v1-API-K562",
+      "ratio": 1.0
+    },
+    {
+      "split": "fresh",
+      "k": 20,
+      "model": "FS_LIN5_lam",
+      "ratio": 1.045777
     }
   ],
   "shipped_pairs_by_lab": {
@@ -860,5 +755,5 @@
     "WONG16": 1225,
     "ZHAO18": 1275
   },
-  "scope": "Point estimates use all published rows. Rank intervals use the tested leaderboard expectations. No restricted source data, fitting or retuning."
+  "scope": "Budget curves use shipped-data scores. The locked-test plot shows published historical ranks for the displayed methods."
 }
