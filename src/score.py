@@ -29,11 +29,10 @@ def main(argv=None):
     ap = argparse.ArgumentParser(prog=f"opal-bench-score {cmd}")
     if cmd == "table":
         ap.add_argument("rows"); ap.add_argument("--out"); a = ap.parse_args(rest); R = pd.read_csv(a.rows); md = []
+        R = R[~R.model.isin(LB.RETIRED_OPAL_METHODS)]
         for s in ([None] if "split" not in R else sorted(R.split.unique())):
             Rs = R if s is None else R[R.split == s]
-            tables = {k: table.drop(index=list(LB.RETIRED_OPAL_METHODS), errors="ignore")
-                      for k, table in LB.tables(Rs).items()}
-            md += [f"### {s or 'Combined'}", "", LB.markdown(tables)]
+            md += [f"### {s or 'Combined'}", "", LB.markdown(LB.tables(Rs))]
         txt = "\n".join(md); print(txt)
         if a.out: open(a.out, "w", encoding="utf-8").write(txt + "\n")
         return

@@ -6,7 +6,7 @@ import numpy as np
 import pandas as pd
 import pytest
 
-from opal_bench import embedding_heads, fewshot, opal_v1, tracks
+from opal_bench import embedding_heads, fewshot, opal_v1, score, tracks
 
 
 def test_unseen_gene_membership_includes_both_endpoints_and_calibration():
@@ -135,6 +135,34 @@ def test_historical_roster_lists_missing_models_without_metrics():
     assert tracks.include_historical_methods(scores, history, {20}) == [
         scores[0], {"k": 20, "method": "NET_ATT"},
     ]
+
+
+def test_table_ranks_only_displayed_methods(tmp_path, capsys):
+    rows = tmp_path / "rows.csv"
+    pd.DataFrame({
+        "unit": "U", "lab": "L", "k": 0, "draw": 0,
+        "model": ["v1R", "MID", "MIN"], "mse": [0.25, 1.0, 2.0],
+    }).to_csv(rows, index=False)
+    score.main(["table", str(rows)])
+    report = capsys.readouterr().out
+    assert "v1R" not in report
+    assert "| MID | 1.000 | 1 [1–1] | 1.000 |" in report
+    assert "| MIN | 2.000 | 2 [2–2] | 0.000 |" in report
+
+
+def test_summary_preserves_a_shared_interval_source():
+    records = pd.DataFrame({
+        "unit": "U", "lab": "L", "k": 20, "draw": [0, 1], "method": "custom",
+        "scored": True, "interval_coverage": 0.9, "interval_width": 1.0,
+    })
+    [row] = tracks.summarize(records.assign(interval_source="external_calibration"))
+    assert row["interval_source"] == "external_calibration"
+    assert "†" not in tracks.markdown({"test": [row]})
+    [implicit] = tracks.summarize(records.assign(interval_source=None))
+    assert "interval_source" not in implicit
+    for sources in (["external_calibration", None], ["external_calibration", "training_screen"]):
+        with pytest.raises(ValueError, match="same interval source"):
+            tracks.summarize(records.assign(interval_source=sources))
 
 
 def test_embedding_head_is_symmetric_and_keeps_reference_labels_out_of_point_fit(tmp_path, monkeypatch):

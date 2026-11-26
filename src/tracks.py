@@ -155,10 +155,12 @@ def summarize(records):
             if has_interval.any() and not has_interval.all():
                 raise ValueError(f"{method} must return intervals for every draw in an interval budget")
         source = {}
-        if "interval_source" in group and group.interval_source.notna().any():
-            if not group.interval_source.eq("training_screen").all():
-                raise ValueError(f"{method} must use the same interval source for every draw in a budget")
-            source["interval_source"] = "training_screen"
+        if "interval_source" in group:
+            sources = group.interval_source.dropna()
+            if not sources.empty:
+                if len(sources) != len(group) or sources.nunique() != 1:
+                    raise ValueError(f"{method} must use the same interval source for every draw in a budget")
+                source["interval_source"] = sources.iat[0]
         metrics = group.drop(columns=["k", "method", "draw", "scored", "interval_source"],
                              errors="ignore")
         counts = [col for col in metrics if col.endswith("_pairs")]
