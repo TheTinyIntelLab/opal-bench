@@ -1,0 +1,232 @@
+{
+  "environment": {
+    "os": "Windows-10-10.0.19045-SP0",
+    "cpu": "Intel Core i7-14700K",
+    "python": "3.14.0",
+    "numpy": "2.3.5",
+    "pandas": "2.3.3",
+    "blas_threads": 1
+  },
+  "methods": {
+    "ADD": {
+      "params": 0,
+      "peak_ram_mib": 379.13,
+      "cpu_seconds": 9.516
+    },
+    "EMB_GenePT": null,
+    "EMB_Geneformer": null,
+    "EMB_scGPT": null,
+    "FS_EMB_GenePT": null,
+    "FS_EMB_Geneformer": null,
+    "FS_EMB_scGPT": null,
+    "FS_GBM": null,
+    "FS_GRAPH": null,
+    "FS_LIN5_lam": {
+      "params": 6,
+      "peak_ram_mib": 382.43,
+      "cpu_seconds": 10.891
+    },
+    "FS_LIN5x": null,
+    "FS_MLP": null,
+    "GBM": null,
+    "GRAPH": null,
+    "LIN5x": null,
+    "MID": {
+      "params": 0,
+      "peak_ram_mib": 381.38,
+      "cpu_seconds": 8.047
+    },
+    "MIN": {
+      "params": 0,
+      "peak_ram_mib": 380.61,
+      "cpu_seconds": 7.875
+    },
+    "MLP": null,
+    "NET_ATT": null,
+    "NET_MLP": null,
+    "GenePT-ridge": {
+      "params": 39,
+      "peak_ram_mib": 489.02,
+      "cpu_seconds": 50.047
+    },
+    "ESM2-ridge": {
+      "params": 39,
+      "peak_ram_mib": 463.56,
+      "cpu_seconds": 47.938
+    },
+    "Geneformer-v2-ridge": {
+      "params": 39,
+      "peak_ram_mib": 467.43,
+      "cpu_seconds": 47.953
+    },
+    "scGPT-human-ridge": {
+      "params": 39,
+      "peak_ram_mib": 465.33,
+      "cpu_seconds": 49.0
+    },
+    "scGPT-pancancer-ridge": {
+      "params": 39,
+      "peak_ram_mib": 464.61,
+      "cpu_seconds": 49.062
+    },
+    "GeneCompass-ridge": {
+      "params": 39,
+      "peak_ram_mib": 464.89,
+      "cpu_seconds": 45.734
+    },
+    "UCE-33L-ridge": {
+      "params": 39,
+      "peak_ram_mib": 464.86,
+      "cpu_seconds": 43.188
+    },
+    "scFoundation-ridge": {
+      "params": 39,
+      "peak_ram_mib": 464.82,
+      "cpu_seconds": 43.141
+    },
+    "scPRINT-ridge": {
+      "params": 39,
+      "peak_ram_mib": 465.19,
+      "cpu_seconds": 40.812
+    },
+    "Opal-v1-API-K562": {
+      "params": 91809,
+      "peak_ram_mib": 590.55,
+      "cpu_seconds": 19.812
+    }
+  },
+  "reported_params": {
+    "NET_ATT": 844801,
+    "NET_MLP": 582657
+  },
+  "auxiliary": {
+    "a": {
+      "ADD": {
+        "params": 0,
+        "peak_ram_mib": 258.85,
+        "cpu_seconds": 1.594
+      },
+      "MIN": {
+        "params": 0,
+        "peak_ram_mib": 257.9,
+        "cpu_seconds": 1.516
+      },
+      "MID": {
+        "params": 0,
+        "peak_ram_mib": 258.62,
+        "cpu_seconds": 1.516
+      },
+      "LIN5": {
+        "params": 6,
+        "peak_ram_mib": 258.74,
+        "cpu_seconds": 2.859
+      },
+      "BEST_RULE": {
+        "params": 0,
+        "peak_ram_mib": 259.1,
+        "cpu_seconds": 2.969
+      },
+      "ATLAS": {
+        "params": 328752,
+        "peak_ram_mib": 258.65,
+        "cpu_seconds": 10.297
+      }
+    },
+    "a_fs20": {
+      "ADD": {
+        "params": 0,
+        "peak_ram_mib": 258.91,
+        "cpu_seconds": 2.328
+      },
+      "MIN": {
+        "params": 0,
+        "peak_ram_mib": 257.67,
+        "cpu_seconds": 2.312
+      },
+      "MID": {
+        "params": 0,
+        "peak_ram_mib": 258.98,
+        "cpu_seconds": 2.141
+      },
+      "LIN5": {
+        "params": 6,
+        "peak_ram_mib": 259.24,
+        "cpu_seconds": 2.812
+      },
+      "BEST_RULE": {
+        "params": 0,
+        "peak_ram_mib": 258.75,
+        "cpu_seconds": 2.406
+      },
+      "ATLAS": {
+        "params": 328752,
+        "peak_ram_mib": 258.15,
+        "cpu_seconds": 7.359
+      },
+      "FS_BEST_RULE": {
+        "params": 0,
+        "peak_ram_mib": 221.41,
+        "cpu_seconds": 1.594
+      },
+      "FS_LIN5": {
+        "params": 6,
+        "peak_ram_mib": 222.36,
+        "cpu_seconds": 1.562
+      }
+    },
+    "b": {
+      "ADD": {
+        "params": 0,
+        "peak_ram_mib": 213.79,
+        "cpu_seconds": 1.562
+      },
+      "MIN": {
+        "params": 0,
+        "peak_ram_mib": 212.61,
+        "cpu_seconds": 1.531
+      },
+      "MID": {
+        "params": 0,
+        "peak_ram_mib": 213.68,
+        "cpu_seconds": 1.641
+      },
+      "LIN5": {
+        "params": 6,
+        "peak_ram_mib": 214.01,
+        "cpu_seconds": 1.578
+      },
+      "BEST_RULE": {
+        "params": 0,
+        "peak_ram_mib": 212.43,
+        "cpu_seconds": 1.609
+      },
+      "ATLAS": {
+        "params": 328448,
+        "peak_ram_mib": 283.3,
+        "cpu_seconds": 23.797
+      }
+    },
+    "c": {
+      "RULE_ADD_MINUS_MIN": {
+        "params": 0,
+        "peak_ram_mib": 189.91,
+        "cpu_seconds": 0.656
+      },
+      "LIN5": {
+        "params": 6,
+        "peak_ram_mib": 260.17,
+        "cpu_seconds": 1.703
+      },
+      "BEST_RULE": {
+        "params": 0,
+        "peak_ram_mib": 259.18,
+        "cpu_seconds": 1.5
+      },
+      "ATLAS": {
+        "params": 328752,
+        "peak_ram_mib": 258.03,
+        "cpu_seconds": 6.344
+      }
+    }
+  }
+}

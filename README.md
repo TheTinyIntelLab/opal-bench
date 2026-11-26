@@ -33,14 +33,23 @@ Train on the allowed labs, then use the target screen's singles and k calibratio
 | Track | Evaluation units | Allowed training | Measured pairs, k | Draws |
 | --- | --- | --- | --- | --- |
 | Development | 18 labs | Other development labs, nested leave-one-lab-out | 0, 10, 20, 50 | 20 |
-| Locked test | 4 labs, 31 cell lines | All 18 development labs | 0, 10, 20, 50 | 20 |
+| Locked test | 4 labs, 31 cell lines | 18 development labs | 0, 10, 20, 50 | 20 |
 | Fresh SHEN26 | 2 cell lines | Every lab in the benchmark table | 0, 5, 20 | 50 |
 
 At k = 0 there is one draw and the whole unit is scored. The main metric is **MSE / MSE(MID)**, geometrically averaged over labs after averaging log ratios over draws and cell lines within each lab. Lower is better; MID is 1. Rank intervals use 2,000 bootstrap replicates over labs, then cell lines where applicable.
 
-All screens share one normalization: counts to CPM, log2 fold change, centering on controls or singles, then division by c = −(the fifth percentile of single-gene log fold changes), floored at 0.1. In these units ADD = sa + sb, MIN = min(sa, sb), and MID = ½(ADD + MIN).
+For each screen, convert counts to CPM, compute log2 fold change, center on controls or singles, then divide by c = −(the fifth percentile of single-gene log fold changes), floored at 0.1. In these units ADD = sa + sb, MIN = min(sa, sb), and MID = ½(ADD + MIN).
 
 Auxiliary tasks measure zero-shot held-out-lab prediction (`a`), 20-pair calibration (`a_fs20`), held-out genes (`b`), strong-negative-interaction AUROC (`c`) and between-lab reproducibility (`d`). The [full leaderboard](leaderboard/LEADERBOARD.md) includes every track.
+
+### Supplemental tracks
+
+- **Unseen genes.** Score growth MSE on test pairs with exactly one, exactly two, or at least one gene absent from the allowed training pairs and the current draw's calibration pairs. Each draw is evaluated against its own gene roster. Target singles are still available at prediction time. The K562 API entry includes the checkpoint's labeled training genes in its roster and omits its source lab from unseen-gene scoring. Submitters must declare any external training on labeled pair data before entering this track.
+- **Top-5% hits.** Rank measured and predicted interactions by pair growth minus additive growth. The bottom 5% are the synergistic tail and the top 5% are the buffering tail, each rounded up to a whole number of pairs. Sort ties by pair key, take the first ranks for synergy and last ranks for buffering. Report precision and recall for both tails. They have the same value here because the predicted and measured sets have the same size. These are rank-based screen labels.
+- **Uncertainty.** An adapter can return `opal_bench.fewshot.Prediction(point, lower, upper)` with a 90% prediction interval per row. Score the fraction of outcomes inside the inclusive bounds and mean interval width in normalized growth units. Compare width alongside coverage against the 90% target. With `--baseline-intervals`, the benchmark also reports empirical residual intervals for every rerunnable baseline with enough calibration pairs. The fixed rules and K562 API use the k calibration residuals. The ridge deterministically reserves half of k for residuals and use the other half to fit the interval center. The radius is the absolute residual at rank `ceil(0.90 * (m + 1))`, with ranks starting at one and `m` equal to the number of held-out calibration pairs. At least nine residuals are needed for a finite target-screen band. With `--training-intervals`, a baseline without enough target calibration pairs uses the largest eligible training screen, breaking ties by lab name and excluding any screen that supplied its frozen checkpoint. The benchmark uses a deterministic draw of k source pairs to fit adaptive baselines, then takes the same residual quantile on the remaining source pairs. Fixed baselines use the entire source screen for residuals. The radius is applied to the original target prediction, and those results carry `interval_source: training_screen`. Point scores retain the original calibration procedure. Training-screen intervals measure transfer and make no nominal coverage guarantee on a new screen.
+- **Rolling prospective.** Register a dated, frozen submission to be scored only on later screen releases. The [prospective protocol](PROSPECTIVE.md) defines the freeze, eligibility and reporting rules.
+
+Supplemental metrics use only non-calibration pairs and average draws within a cell line, then cell lines within a lab, then labs. An empty unseen cohort is omitted from that cohort's mean. Run `opal-bench-score tracks` to score the shipped development, locked-test and fresh splits at each supported budget.
 
 ## Install
 
@@ -59,14 +68,15 @@ The package is `Opal-Bench`; its Python import is `opal_bench`. Tests reproduce 
 ```bash
 opal-bench-score fewshot                        # Shipped dev, test and fresh baselines
 opal-bench-score tasks                          # Auxiliary tasks on shipped data
-opal-bench-score table leaderboard/rows.csv.gz  # Tables from all published rows
+opal-bench-score tracks --split test --budget 20 --baseline-intervals --training-intervals # Supplemental locked-test scores
+opal-bench-score table leaderboard/rows.csv.gz  # Tables from the published rows
 ```
 
 ## Results
 
-On the locked test, a six-coefficient ridge fitted to 20 target pairs comes close to the larger networks, with overlapping bootstrap rank intervals. That result doesn't carry over to fresh SHEN26. There, Opal refit is the only listed method below MID at k = 20.
+Of the two networks on the locked test, only NET_ATT's bootstrap rank interval overlaps the six-coefficient ridge's at k = 20.
 
-<img src="images/label_budget.svg" width="100%" alt="MSE relative to MID across calibration budgets. Ridge and Opal refit improve on the locked test; gains are smaller on fresh SHEN26." />
+<img src="images/label_budget.svg" width="100%" alt="Six-coefficient ridge and official Opal K562 API scores across shipped calibration budgets." />
 
 ### Locked test, k = 20
 
@@ -74,23 +84,21 @@ On the locked test, a six-coefficient ridge fitted to 20 target pairs comes clos
 | --- | ---: | ---: |
 | NET_MLP | 0.424 | 1 [1–3] |
 | NET_ATT | 0.425 | 2 [1–4] |
-| Opal refit (v1R) | 0.435 | 3 [1–4] |
 | Cross-lab ridge (FS_LIN5x) | 0.456 | 4 [3–4] |
 | Six-coefficient ridge (FS_LIN5_lam) | 0.460 | 5 [4–5] |
 | MID | 1.000 | 12 [12–13] |
-| Opal frozen (v1F) | 1.658 | 16 [13–16] |
 
-<img src="images/locked_test.svg" width="100%" alt="All 16 locked-test methods at k = 20, with MSE ratios and bootstrap rank intervals. The small ridge and the largest networks have overlapping rank intervals." />
+<img src="images/locked_test.svg" width="100%" alt="Locked-test MSE ratios and bootstrap rank intervals at k = 20. Of the two networks, only NET_ATT's rank interval overlaps the six-coefficient ridge's." />
 
-The figures use the published per-draw rows, including aggregate results for the five restricted labs. You can re-score the built-in rules and few-shot ridge here. The cross-lab learners have published evaluation rows, but their training code isn't included. The [leaderboard](leaderboard/LEADERBOARD.md) records each method's provenance.
+The budget curves use the shipped scores in [shipped-fewshot.json](leaderboard/shipped-fewshot.json). The locked-test leaderboard figure uses the [published per-draw rows](leaderboard/rows.csv.gz), which include aggregate results for the five restricted labs. You can re-score the built-in rules and few-shot ridge here. The [leaderboard](leaderboard/LEADERBOARD.md) records method provenance and the measured parameter counts, peak RAM and CPU seconds for reproducible baselines on the shipped data. It also shows the two exact network parameter counts recorded in the original run. Historical methods with missing run artifacts are listed with their published scores.
 
 ### What did not transfer
 
-With no target pairs, every tested learner loses to MID on the locked test. Foundation-model and graph features don't beat the singles-only few-shot ridge, frozen Opal doesn't transfer, and choosing calibration pairs actively performs worse than choosing them at random. On fresh SHEN26 at k = 20, Opal refit scores 0.941 and the small ridge scores 1.046 against MID at 1.000. [Negative results](NEGATIVE_RESULTS.md) records the experiments behind these comparisons.
+With no target pairs, every tested learner loses to MID on the locked test. Foundation-model and graph features don't beat the singles-only few-shot ridge, and choosing calibration pairs actively performs worse than choosing them at random. On fresh SHEN26 at k = 20, the small ridge scores 1.046 against MID at 1.000. [Negative results](NEGATIVE_RESULTS.md) records the experiments behind these comparisons.
 
 ## Submit a method
 
-Expose a factory that receives allowed training pairs and returns a predictor. The predictor receives labeled calibration pairs and evaluation pairs with `y` removed; return one prediction per evaluation row, or `None` to abstain at an unsupported budget.
+Expose a factory that receives allowed training pairs and returns a predictor. Both predictor inputs contain singles, pair identifiers and any published covariates. Only calibration pairs carry outcomes. Return one finite point estimate per evaluation row, a `Prediction` with interval bounds, or `None` to abstain at an unsupported budget.
 
 ```python
 import numpy as np
@@ -108,7 +116,9 @@ opal-bench-score fewshot --method mypackage.mymodule:make_method --name MYMODEL 
 
 Tune only by nested leave-one-lab-out on the allowed training labs. Use no target pair outcomes beyond the k calibration pairs, and never tune on the locked test or SHEN26. Calibration draws are fixed by the published md5 seeds; do not change splits, seeds, k grids or the metric.
 
-To submit, open a pull request with rows covering all 22 labs and a link to your method code. Auxiliary tasks `a`–`c` accept a predictions CSV with `task,lab,key,pred`; `python -m opal_bench.template --help` describes the required rows.
+To submit, open a pull request with rows covering the 22 benchmark labs and a link to your method code. Auxiliary tasks `a`–`c` accept a predictions CSV with `task,lab,key,pred`; `python -m opal_bench.template --help` describes the required rows.
+
+The **Score a reviewed submission** GitHub Action reruns an approved adapter on the shipped data from its selected revision. In the pull request, include the adapter's import path, any pinned extra dependencies in `submissions/requirements.txt`, and the training-data declaration. A maintainer dispatches the workflow on a reviewed branch containing the importable adapter. The run summary posts the main and supplemental scores, and its artifact contains machine-readable results. For unseen-gene scoring, use only the supplied training/calibration pair outcomes, and disclose any fixed external resources. Locally, opt an eligible adapter in with `--unseen-method MYMODEL`. Adapters may skip entire budgets. An uncertainty entry must return finite, ordered bounds for every evaluation pair at an entered budget.
 
 ## Data and reproduction
 
@@ -123,9 +133,9 @@ The shipped lab-level table contains **334,669 pairs from 17 labs**. Source size
 | `data/redistributable/test_units.csv.gz` | 16,940 cell-line rows for BURGOLD25, HT-29 |
 | `data/redistributable/by_source/` | One file for each shipped lab |
 | `data/fresh/SHEN26.csv.gz` | 1,530 rows: 765 pairs across HCT116 and GM12878 |
-| `leaderboard/rows.csv.gz` | 49,038 per-draw MSE rows for all published methods |
+| `leaderboard/rows.csv.gz` | 49,038 per-draw MSE rows across the published methods |
 
-### Score all 22 labs locally
+### Score the 22-lab benchmark locally
 
 The public checkout covers 16 development labs, BURGOLD25 and fresh SHEN26. ABBVIE25, DU17, HAN17, KLINGBEIL24 and SCHEMATIC25 are excluded because their source terms restrict or don't clearly allow redistribution. Raw-source preprocessing scripts aren't bundled.
 
@@ -142,6 +152,47 @@ The scorer uses `data/full/` when it exists, and Git ignores it. [SHA256SUMS.txt
 The locked-test labs were used in earlier zero-shot pilots, so they were held out from few-shot development but are not pristine. SHEN26 was never used during development and provides the fresh check. Its interaction signal is small relative to noise, and model gains there are correspondingly smaller.
 
 Lab agreement is limited: median between-lab correlation is 0.21 across the full benchmark. These scores measure pair-growth prediction under the declared data access rules; they do not establish biological discovery, causal interactions or universal transfer across screens. To our knowledge, this is the first public held-out-lab pair-growth benchmark spanning CRISPRi, Cas9, Cas12a and CHyMErA under one normalization. Related work includes SLKB (NAR 2024) and MLEC-iGeneCombo (2025).
+
+## Foundation-model adapters
+
+The shipped comparison covers `GenePT-ridge`, `ESM2-ridge`, `Geneformer-v2-ridge`, `scGPT-human-ridge`, `scGPT-pancancer-ridge`, `GeneCompass-ridge`, `UCE-33L-ridge`, `scFoundation-ridge`, and `scPRINT-ridge`. Each fits the same symmetric, 39-coefficient ridge to growth residuals against MID. It uses a 16-dimensional static gene representation, then adds a ridge adjustment at positive k using the assigned calibration pairs. The head reserves an eligible training lab for uncertainty calibration and keeps its labels out of the point fit. The footprint measures the head on CPU, including embedding loading, any projection and interval generation. It excludes upstream embedding generation.
+
+For GenePT and ESM2, set `OPAL_BENCH_EMBEDDINGS` to the directory containing the exact archived projections at `semantic-GenePT/embedding.npz` and `semantic-ESM2/embedding.npz`. The adapters verify their hashes. The projections use resources from the [PRESAGE data release](https://doi.org/10.5281/zenodo.15587986) under CC BY-NC 4.0.
+
+For the single-cell heads, use the [pinned Gene Embedding Hub snapshot](https://huggingface.co/datasets/BoevaLab/Gene-Embedding-Hub-dataset/tree/be4ceda18f562560c3f2253f054e2c3e5b97d31f/data). Download `data/master_gene_table.csv` and the `genes.tsv` and `embeddings.npz` files in these folders under `data/embeddings/`. The folder metadata links to each source checkpoint and its terms. Keep the files outside this checkout and set `OPAL_BENCH_GENE_HUB` to the downloaded `data` directory.
+
+| Head | Hub folder |
+| --- | --- |
+| Geneformer-v2-ridge | `geneformer_v2_316m` |
+| scGPT-human-ridge | `scgpt_whole_human` |
+| scGPT-pancancer-ridge | `scgpt_pancancer` |
+| GeneCompass-ridge | `genecompass_base_gene_token` |
+| UCE-33L-ridge | `uce_33l` |
+| scFoundation-ridge | `scfoundation_gene_pos` |
+| scPRINT-ridge | `scprint_medium_v1_5_gene` |
+
+The scorer verifies the bank and mapping hashes, projects each pinned matrix with a fixed seed, and standardizes the projected columns across the external bank. It joins Ensembl IDs to unique current gene symbols. A missing gene has a zero vector, and the head receives the count of mapped genes as a feature.
+
+```bash
+opal-bench-score fewshot --data data/redistributable --embedding-heads --opal-v1 DIR --json leaderboard/shipped-fewshot.json
+opal-bench-score tracks --data data/redistributable --embedding-heads --opal-v1 DIR --baseline-intervals --training-intervals --historical-rows leaderboard/rows.csv.gz --json leaderboard/track-scores.json
+```
+
+Pass specific method names after `--embedding-heads` to run a subset. The [shipped few-shot comparison](leaderboard/shipped-fewshot.json) uses the built-in baselines on the same data. The original GenePT, Geneformer, scGPT and GEARS-style rows retain their published scores and refer to their original fitted adapters.
+
+### Official Opal v1 API
+
+`Opal-v1-API-K562` queries the official Opal v1 API with the pinned K562 growth bundle. It uses the source checkpoint's stored singles and divides its outputs by the negative fifth percentile of those singles, floored at 0.1. The benchmark uses target MID on abstentions and on the checkpoint's source screen, HORLBECK18. It also excludes that screen from the method's unseen-gene scores. The supplemental intervals are benchmark-calibrated residual bands. The API returned predictions on 849 of 213,776 non-source development rows and 57 of 16,940 shipped locked-test rows. It abstained on the 1,530 SHEN26 rows.
+
+To reproduce the API entry, install the [Opal v1.0.0 release wheel](https://github.com/TheTinyIntelLab/opal/releases/tag/v1.0.0) and download the [pinned public growth bundle](https://huggingface.co/TheTinyIntelLab/opal-growth/tree/e8660c075632d50cb0b4ba4b59dd881eaf91ca78). Pass `--opal-v1 DIR` to either scorer. Add `--baseline-intervals --training-intervals` to `tracks` for its uncertainty scores. Pass those same Opal options to the footprint tool to measure the API entry.
+
+## Roadmap
+
+- **CRISPRa and CRISPRi.** Define evaluation by intervention direction so activation and repression can be compared across screens with different single-gene effects. The existing CRISPRi screens remain part of the current pair-growth benchmark.
+- **Drug–gene pairs.** Define treatment, dose and cell context as part of each evaluation unit, with matching drug-only and gene-only controls.
+- **Triples.** Define splits that account for observed constituent pairs and use a reference that distinguishes three-way effects from effects already explained by pairs.
+
+These are planned extensions. This release ships no new data for them.
 
 ## Documentation and repository
 
