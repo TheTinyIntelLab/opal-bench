@@ -1,0 +1,83 @@
+name: Score a reviewed submission
+
+on:
+  workflow_dispatch:
+    inputs:
+      adapter:
+        description: Reviewed Python adapter (module:factory) at the selected revision
+        required: true
+        type: string
+      method:
+        description: Display name (letters, numbers, underscores or hyphens)
+        required: true
+        type: string
+      unseen:
+        description: Training gene roster complies with the unseen-gene rules
+        type: boolean
+        default: false
+
+permissions:
+  contents: read
+
+jobs:
+  score:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    env:
+      OPENBLAS_NUM_THREADS: '1'
+      OMP_NUM_THREADS: '1'
+      MKL_NUM_THREADS: '1'
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+      - name: Install benchmark and reviewed dependencies
+        run: |
+          python -m pip install -e .
+          if [[ -f submissions/requirements.txt ]]; then
+            python -m pip install -r submissions/requirements.txt
+          fi
+      - name: Rerun on the shipped screens
+        shell: bash
+        env:
+          ADAPTER: ${{ inputs.adapter }}
+          METHOD: ${{ inputs.method }}
+          UNSEEN: ${{ inputs.unseen }}
+        run: |
+          [[ "$ADAPTER" =~ ^[a-zA-Z_][a-zA-Z0-9_]*(\.[a-zA-Z_][a-zA-Z0-9_]*)*:[a-zA-Z_][a-zA-Z0-9_]*$ ]] ||
+            { echo 'Use module:factory for the adapter'; exit 1; }
+          [[ "$METHOD" =~ ^[a-zA-Z0-9_][a-zA-Z0-9_-]{0,63}$ ]] ||
+            { echo 'Invalid method name'; exit 1; }
+          # A reviewed adapter can be a plain module in the checkout.
+          export PYTHONPATH="$PWD"
+          opts=(--data data/redistributable --method "$ADAPTER" --name "$METHOD")
+          unseen=()
+          if [[ "$UNSEEN" == true ]]; then unseen=(--unseen-method "$METHOD"); fi
+          python -m opal_bench.score fewshot "${opts[@]}" --out fewshot.md --json fewshot.json --rows fewshot.csv.gz
+          python -m opal_bench.score tracks "${opts[@]}" "${unseen[@]}" --baseline-intervals --training-intervals --out tracks.md --json tracks.json --rows tracks.csv.gz
+          python - "$METHOD" <<'PY'
+          import json
+          import sys
+          from pathlib import Path
+
+          scores = json.loads(Path("tracks.json").read_text(encoding="utf-8"))
+          if not any(row["method"] == sys.argv[1] for split in scores.values() for row in split):
+              sys.exit("The submission produced no scores on the shipped screens.")
+          PY
+          {
+            printf 'Shipped screens only. Scorer and adapter revision: `%s`.\n\n' "$GITHUB_SHA"
+            cat fewshot.md
+            printf '\n'
+            cat tracks.md
+          } >> "$GITHUB_STEP_SUMMARY"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: opal-bench-scores
+          path: |
+            fewshot.json
+            fewshot.csv.gz
+            tracks.json
+            tracks.csv.gz
