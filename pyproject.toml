@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "Opal-Bench"
-version = "1"
+version = "1.1.0"
 description = "Held-out-lab benchmark for predicting combinatorial CRISPR pair growth from single-gene growth (The Tiny Intelligence Lab)"
 readme = "README.md"
 license = {text = "MIT (code); data under per-source licences, see DATA_LICENSES.md"}
